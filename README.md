@@ -4,5 +4,7 @@
     npm start
     
 of
-   node server.js mode:development
-   
+
+    node server.js mode:development
+
+
