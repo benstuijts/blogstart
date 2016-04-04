@@ -1,3 +1,8 @@
 # blogstart
 ## Installation
-'node server.js mode:development'
+
+    npm start
+    
+of
+   node server.js mode:development
+   
