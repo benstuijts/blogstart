@@ -25,6 +25,7 @@ const config = function(req,res, next) {
     c,
   }
   console.log(c);
+  console.log(res.locals);
 }
 
 app.use('/admin', require('./routes/admin'));
