@@ -1,0 +1,30 @@
+{
+  "name": "blogstart",
+  "version": "1.0.0",
+  "description": "'node server.js mode:development'",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js mode:development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benstuijts/blogstart.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benstuijts/blogstart/issues"
+  },
+  "homepage": "https://github.com/benstuijts/blogstart#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mongoose": "^4.4.11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1"
+  }
+}
