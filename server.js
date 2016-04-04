@@ -11,7 +11,7 @@ app_config[key] = val;
 const http = require("http");
 const express = require("express");
 const app           = express();
-const config  = require("./config/")
+const config  = require("./config/init");
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -20,9 +20,11 @@ app.use(express.static('public'));
 
 /* Middleware */
 const config = function(req,res, next) {
+  let c = config[app_config['mode']];
   res.locals = {
-    
+    c,
   }
+  console.log(c);
 }
 
 app.use('/admin', require('./routes/admin'));
