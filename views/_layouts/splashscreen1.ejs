@@ -1,0 +1,53 @@
+<% include ../_elements/navigation-top-bar %>
+
+<div class="splashscreen-wrapper">
+    wrapper
+</div>
+
+
+
+<div class="container1_3">
+    <h1><%= name%></h1>
+</div>  
+<div class="container1_3">
+    <h1><%= name%></h1>
+</div>  
+<div class="container1_3">
+    <h1><%= name%></h1>
+</div>  
+
+
+<style>
+.blogstart-nav {
+    background:#e35527;
+    border: none;
+    border-radius: 0;
+    color: black;
+    margin-bottom: 0px;
+    z-index: 0;
+}
+.navbar-brand {
+    background: black;
+}
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    background: rgba(10,10,10,.2);
+    color: white;
+}
+.splashscreen-wrapper {
+    height: 100vh;
+}
+.container1_3 {
+    position: relative;
+    height: calc(100% - 50px);
+    width: 100%;
+    text-align: center; 
+    background: pink;
+    margin-top: -20px !important
+}
+.container1_3 h1{
+    //line-height: 33vh;
+}
+</style>

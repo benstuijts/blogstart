@@ -1,0 +1,49 @@
+<% 
+    /* 
+        Element:    breadcrumbs.ejs
+        Insert:     include ../_elements/breadcrumbs
+        Variables:  breadcrumbs type: Array with object:
+                    { url: '', name: '' }
+                    article type: Object:
+                    { title: '', subtitle: '', slug: '' }
+                    baseUrl
+                    snippit
+        CSS:        none 
+                    
+    */
+    
+%>
+
+
+
+<ol class="breadcrumb">
+    <% breadcrumbs.forEach(function(crumb) { %>
+        <li><a href="<%= crumb.url %>"><%= crumb.name%></a></li>
+    <% }); %>
+    
+    <% if (article) { %>
+        <a  class="pull-right"
+            href="mailto:
+              ?subject=<%= article.title %>?
+              &body=Ik kwam dit interessante artikel tegen op <%= baseUrl %>%0A%0A<%= article.title %>%0A<%= article.subtitle %>%0A<%= snippit %>%0ALees verder op <%= baseUrl %><% article.slug %><%= article.slug %>.
+              " 
+            title="mail dit artikel naar iemand"
+        >
+             <i class="fa fa-envelope-o"></i> email
+        </a>
+        
+        <a  class="pull-right" 
+            href="http://www.printfriendly.com/print?url=<%= baseUrl %><%= article.slug %>" 
+            target="_blank" 
+            title="print dit artikel"
+        >
+    <i class="fa fa-print"></i> print |
+</a>
+        
+    <% } %>
+</ol>
+
+<div class="form-group">
+    <label for="url">Url</label>
+    <input type="text" class="form-control" id="url" value="<%= url %>">
+  </div>

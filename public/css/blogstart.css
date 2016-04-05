@@ -1,0 +1,7 @@
+/* Modification Bootstrap */
+div.navbar, .navbar-default{
+    margin-bottom: 0!important;
+}
+* {
+  box-sizing: border-box;
+}

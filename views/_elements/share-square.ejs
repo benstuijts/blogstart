@@ -1,0 +1,56 @@
+<%/* 
+        Element:    share-square.ejs
+        Insert:     include ../_elements/share-square
+        Variables:  url
+               
+*/%>
+
+<div class="share-square">
+    <a href="http://www.facebook.com/sharer.php?u=<%= url %>" class="share-square-part share-square-facebook">
+        <i class="fa fa-facebook-square fa-2x fa-fw"></i>
+    </a>
+    <a href="http://twitter.com/share?url=<%= url %>" class="share-square-part share-square-twitter">
+        <i class="fa fa-twitter fa-2x fa-fw"></i>
+    </a>
+    <div class="share-square-share">
+        S H A R E
+    </div>
+    
+    <a href="https://plus.google.com/share?url=<%= url %>" class="share-square-part share-square-google">
+        <i class="fa fa-google fa-2x fa-fw"></i>
+    </a>
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=<%= url %>" class="share-square-part share-square-linkedin">
+        <i class="fa fa-linkedin fa-2x fa-fw"></i>
+    </a>
+</div>
+
+<%/*
+
+.share-square {
+    position: relative; width: 160px; height: 160px; border: 1px solid grey; border-radius: 10px; float: right; margin: 10px
+}
+.share-square-part {
+    position: absolute; display: block; width: 80px; height: 60px; color: white; line-height: 70px; text-align: center;
+}
+.share-square-facebook {
+    top: 0px; left: 0px;
+    background: #337ab7; border-top-left-radius: 10px;
+}
+.share-square-twitter {
+    top: 0px; right: 0px;
+    background: #5bc0de; border-top-right-radius: 10px;
+}
+.share-square-google {
+    bottom: 0px; left: 0px;
+    background: #d9534f; border-bottom-left-radius: 10px;
+}
+.share-square-linkedin {
+    bottom: 0px; right: 0px;
+    background: dodgerblue; border-bottom-right-radius: 10px;
+}
+.share-square-share {
+    position: absolute; top: 60px; left: 0px; width: 100%; height: 40px;line-height: 40px; text-align: center;background: black; color: white;
+}
+
+*/%>

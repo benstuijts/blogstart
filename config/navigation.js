@@ -1,3 +1,6 @@
-module.exports  = {[
-"home" : "/"
-]};
+module.exports  = [
+    {
+        title: "home",
+        href: "/"
+    }
+];

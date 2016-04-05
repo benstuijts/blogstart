@@ -1,6 +1,7 @@
 module.exports = {
     
     development: {
+        name: "Blogstart",
         author: "Ben Stuijts",
         baseUrl: "https://blogstart2016-stuijts.c9users.io/",
         contact: {
@@ -23,7 +24,9 @@ module.exports = {
         administrator: {
             username: 'bens',
             password: '14303963'
-        }    
+        },
+        bootstrap: true,
+        jquery: true,
     }, 
     
     production: {
