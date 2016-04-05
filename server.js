@@ -1,10 +1,12 @@
 'use strict';
+
 var config = [];
 process.argv.slice(2).forEach(function(value) {
   var key = value.split(":")[0];
   var val = value.split(":")[1];
   config[key] = val;
 });
+/* Dependencies */
 const http      = require("http");
 const express   = require("express");
 const app       = express();
