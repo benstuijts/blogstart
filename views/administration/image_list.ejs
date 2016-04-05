@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Image List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    
+    <% if(images.length==0) { %>
+        <h1>No images were found.</h1>
+    <% } %>
+    
+    <% for(var i=0; i<images.length; i++) { %>
+    <div class="media">
+        <div class="media-left">
+            <a href="<%= images[i].filename %>" target="_blank">
+                <img style="width: 48px" class="media-object" title="<%=images[i].image%>" src="<%= images[i].filename %>">
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading"><%=images[i].description%></h4>
+            <input type="text" class="form-control" value="<%= images[i].filename %>" onfocus="this.select();" onmouseup="return false;">
+        </div>
+    </div>
+    
+    <% } %>
+    
+    
+        
+</body>
+</html>

@@ -1,6 +1,4 @@
 module.exports = {
-    
-    development: {
         name: "Blogstart",
         author: "Ben Stuijts",
         baseUrl: "https://blogstart2016-stuijts.c9users.io/",
@@ -23,18 +21,9 @@ module.exports = {
         },
         administrator: {
             username: 'bens',
-            password: '14303963',
-            token: 'MB7qOk6NyZBCgZE5PcoO'
+            password: '14303963'
         },
         bootstrap: true,
         jquery: true,
-    }, 
-    
-    production: {
-        
-    }
-    
-    
-};
 
-function randomString(r){for(var n="",t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",a=0;r>a;a++)n+=t.charAt(Math.floor(Math.random()*t.length));return n}
+};

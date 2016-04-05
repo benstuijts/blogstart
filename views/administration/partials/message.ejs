@@ -1,0 +1,25 @@
+<% if(message) { %>
+    <div class="row">
+        <div class="col-xs-12  alert alert-<%= message.type %>">
+            <% if(message.type == 'success') { %>
+                <i class="fa fa-check-square-o"></i> <%= message.body %>
+            <% } %>
+            <% if(message.type == 'info') { %>
+                <i class="fa fa-info-circle"></i> <%= message.body %>
+            <% } %>
+            <% if(message.type == 'warning') { %>
+                <i class="fa fa-exclamation-circle"></i> <%= message.body %>
+            <% } %>
+            <% if(message.type == 'danger') { %>
+                <i class="fa fa-exclamation-triangle"></i> <%= message.body %>
+            <% } %>
+            <% if(message.type == 'error') { %>
+            
+                <span style="color: red;"><i class="fa fa-server"></i></i> ERROR: <%= message.body %></span>
+            <% } %>
+            
+            
+            
+        </div>
+    </div>
+<% } %>

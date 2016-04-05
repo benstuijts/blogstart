@@ -34,3 +34,5 @@ app.use('/'     , configuration, require('./routes/routes'));
 app.listen(8080, function () {
   console.log('Blog listening on port 8080 in ' + config['mode'] + ' mode.');
 });
+
+function randomString(r){for(var n="",t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",a=0;r>a;a++)n+=t.charAt(Math.floor(Math.random()*t.length));return n}

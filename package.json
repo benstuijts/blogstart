@@ -19,10 +19,12 @@
   "homepage": "https://github.com/benstuijts/blogstart#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "crypto": "0.0.3",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
-    "mongoose": "^4.4.11"
+    "mongoose": "^4.4.11",
+    "multer": "^1.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.9.1"

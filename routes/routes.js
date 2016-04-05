@@ -10,6 +10,8 @@ router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 })); 
 
+
+
 router.get('/', function(req, res){
     res.render('landingspage', {
         navigation: require('../config/navigation')

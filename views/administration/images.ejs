@@ -1,0 +1,54 @@
+<% include ../_html/head %>
+
+
+    <div class="container-fluid">
+        
+        <h1>
+            <i class="fa fa-cogs"></i> Administration Dashboard Images
+            <a href="<%= baseUrl %>admin/logout" class="btn btn-warning pull-right">Logout</a>
+        </h1>
+        
+        <div class="row">
+            
+        </div>
+        
+        <% if(message) { %>
+            <div class="row">
+                <div class="col-xs-12  alert alert-<%= message.type %>">
+                    <i class="fa fa-<%= message.icon %>"></i> <%= message.body %>
+                </div>
+            </div>
+        <% } %>
+        <div class="row">
+            <h2>Upload new Image</h2>
+            <form method="post" action="<%=baseUrl %>admin/images"  enctype="multipart/form-data">
+            <% create_form_field('title', 'Title') %>
+            <% create_form_field('description', 'Description') %>
+            <% create_form_field('alt', 'Alternative text') %>
+            <div class="form-group">
+                <label for="file">File</label>
+                <input type="file" name="file" id="file" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Save image</button>
+            </div>
+        
+        </form>
+        </div>
+        
+       
+        <% if(images) { %>
+            <% include all_images %>
+        <% } %>
+    
+        
+        
+    </div>
+<% include ../_html/scripts %>
+
+<% function create_form_field(name, caption) { %>
+    <div class="form-group">
+        <label for="<%=name%>"><%=caption%></label>
+        <input type="text" name="<%=name%>" id="<%=name%>" class="form-control">
+    </div>
+<% } %>

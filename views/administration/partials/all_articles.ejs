@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <h2>All Articles</h2>
+    <table class="table table-hover">
+        <tr>
+            <th>title</th>
+            <th>subtitle</th>
+            <th>slug</th>
+            <th>tags</th>
+            <th>image</th>
+            <th>views</th>
+            <th>options</th>
+        </tr>
+    <% for(var i=0; i<articles.length; i++) { %>
+        <tr>
+            <td>
+                <%= articles[i].title %><%= articles[i].updatedAt %>
+                <br>
+                <% if(!articles[i].published) { %>
+                    
+                    <a title="publish" class="btn btn-default btn-sm" href="?action=PUBLISH_ARTICLE&id=<%= articles[i]._id %>"><i class="fa fa-microphone"></i> Publish</a>
+                    <b class="text-danger">(not published yet...)</b>
+                <% } %>
+            </td>
+            <td><%= articles[i].subtitle %></td>
+            <td>
+                <a href="<%= baseUrl %><%= articles[i].slug %>"><%= articles[i].slug %></a>
+                
+            </td>
+            <td><%= articles[i].tags %></td>
+            <td><img width="128" title="<%=articles[i].image%>" src="<%=articles[i].image%>" class="img-thumbnail"></td>
+            <td><%= articles[i].views %></td>
+            <td>
+                <a title="edit" class="btn btn-primary" href="?action=EDIT_ARTICLE&id=<%= articles[i]._id %>"><i class="fa fa-pencil-square-o"></i></a>
+                <% if(articles[i].published) { %>
+                    <a title="mute" class="btn btn-default" href="?action=MUTE_ARTICLE&id=<%= articles[i]._id %>"><i class="fa fa-microphone-slash"></i></a>
+                <% } else { %>
+                    <a title="publish" class="btn btn-success" href="?action=PUBLISH_ARTICLE&id=<%= articles[i]._id %>"><i class="fa fa-microphone"></i></a>
+                <% } %>
+                
+                
+                <a title="delete" class="btn btn-warning" href="?action=DELETE_ARTICLE&id=<%= articles[i]._id %>"><i class="fa fa-trash-o"></i></a>
+            </td>
+        </tr>
+    <% } %>
+    </table>
+</div>
