@@ -11,11 +11,9 @@ router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 router.get('/', function(req, res){
-    console.log('routing /');
-    res.locals.add({
+    res.render('landingspage', {
         navigation: require('../config/navigation')
-    }); 
-    res.render('landingspage');
+    });
 });
 
 module.exports = router;

@@ -1,21 +1,27 @@
 <% include ../_elements/navigation-top-bar %>
 
 <div class="splashscreen-wrapper">
-    wrapper
+    <div class="container1_3">
+        <br>
+        <h1>Title</h1>
+    </div>  
+    <div class="container1_3">
+        <h1><i>A framework to kickstart your new blog website.</i></h1>
+    </div>  
+<div class="container1_3">
+    <div class="row">
+        <div class="col-sm-2 col-sm-offset-3">
+            <div class="textXL faa-pulse animated">&#9851;</div>
+        </div>
+        <div class="col-sm-2 ">
+            <div class="textXL">&#9971;</div>
+        </div>
+        <div class="col-sm-2">
+            <div class="textXL faa-spin animated">&#10070;</div>
+        </div>
+    </div>
+</div>     
 </div>
-
-
-
-<div class="container1_3">
-    <h1><%= name%></h1>
-</div>  
-<div class="container1_3">
-    <h1><%= name%></h1>
-</div>  
-<div class="container1_3">
-    <h1><%= name%></h1>
-</div>  
-
 
 <style>
 .blogstart-nav {
@@ -24,7 +30,7 @@
     border-radius: 0;
     color: black;
     margin-bottom: 0px;
-    z-index: 0;
+    z-index: 10;
 }
 .navbar-brand {
     background: black;
@@ -37,17 +43,28 @@
     color: white;
 }
 .splashscreen-wrapper {
+    position: absolute;
+    top: 0px; left: 0px;
+    z-index: 1;
     height: 100vh;
+    width: 100%;
+    overflow: hidden;
 }
 .container1_3 {
     position: relative;
-    height: calc(100% - 50px);
+    height: 33vh;
     width: 100%;
     text-align: center; 
-    background: pink;
-    margin-top: -20px !important
+    margin-top: -20px !important;
+}
+.container1_3 div {
+    line-height: 33vh;
 }
 .container1_3 h1{
-    //line-height: 33vh;
+    line-height: 33vh;
+}
+.textXL {
+    font-size: 150px;
+    color: #e35527;
 }
 </style>
