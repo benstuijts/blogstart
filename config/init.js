@@ -28,6 +28,7 @@ module.exports = {
         },
         bootstrap: true,
         jquery: true,
+        fontawesome: true,
     }, 
     
     production: {

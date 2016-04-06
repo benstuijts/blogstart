@@ -1,0 +1,36 @@
+<% include ./_html/head %>
+
+<% include ./_elements/navigation-top-bar %>
+
+<div class="container-fluid article-header" style="background: <%= article.backgroundColor %>">
+    
+    <div class="container">
+        <div class="row">
+            <h1><%= article.title %></h1>
+            <h3><%= article.author %></h3>
+            <img src="<%= article.image %>">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row article-body">
+            <% include _elements/share-square%>
+            <%= article.body %>
+        </div>
+</div>
+
+
+<% include ./_html/scripts %>
+
+
+<style>
+.article-header {
+    text-align: center;
+    padding: 50px;
+}
+.article-body {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+</style>
