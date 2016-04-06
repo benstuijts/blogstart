@@ -20,4 +20,5 @@ of
 * [ ] Save favorite article
 * [ ] Comment article
 * [ ] User Rights
+* [ ] TinyMCE implementation
 
