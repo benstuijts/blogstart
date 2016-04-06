@@ -9,14 +9,14 @@ of
 
 ## Things to do
 
-[ ] User Model
-[ ] Register User
-[ ] implement mailgun
-[ ] Authenticate User
-[ ] Login User
-[ ] User profile Page
-[ ] Like article
-[ ] Save favorite article
-[ ] Comment article
-[ ] User Rights
+* [ ] User Model
+* [ ] Register User
+* [ ] implement mailgun
+* [ ] Authenticate User
+* [ ] Login User
+* [ ] User profile Page
+* [ ] Like article
+* [ ] Save favorite article
+* [ ] Comment article
+* [ ] User Rights
 
