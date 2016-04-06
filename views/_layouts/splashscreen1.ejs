@@ -1,36 +1,58 @@
 <% include ../_elements/navigation-top-bar %>
 
-<div class="splashscreen-wrapper">
-    <div class="container1_3">
-        <br>
-        <h1>Title</h1>
-    </div>  
-    <div class="container1_3">
-        <h1><i>A framework to kickstart your new blog website.</i></h1>
-    </div>  
-<div class="container1_3">
-    <div class="row">
-        <div class="col-sm-2 col-sm-offset-3">
-            <div class="textXL faa-pulse animated">&#9851;</div>
-        </div>
-        <div class="col-sm-2 ">
-            <div class="textXL">&#9971;</div>
-        </div>
-        <div class="col-sm-2">
-            <div class="textXL faa-spin animated">&#10070;</div>
-        </div>
-    </div>
-</div>     
+<div class="splashscreen">
+    <div class="splashcreen-logo">&#10070;</div>
+    <div class="splashcreen-logo-motto">Quick, simple and SEO proof.</div>
+    <div class="splashcreen-logo-button">
+        <a class="btn btn-default btn-lg">GET STARTED</a></div>
 </div>
+<div class="splashscreen-message-bar">
+    <p>
+        This is just an other message from <span class="text-accent">BlogStart</span>
+    </p>
+</div>
+
+<div class="container">
+<div class="row summary">
+    <div class="col-md-4">
+        <h2>Learn</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium velit odio, vel venenatis urna porttitor eu. Suspendisse pulvinar dui ante, sed ullamcorper enim scelerisque ac. Sed at elementum risus. In eros erat, porta sed justo nec, congue bibendum diam. Maecenas rutrum fringilla est eget interdum. Nam malesuada vitae lorem at vehicula. Sed aliquet nisl non nisi molestie tincidunt et id arcu. 
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Share</h2>
+        <p>
+            Vivamus urna magna, malesuada in fermentum vel, pellentesque id erat. Donec at tempor enim. Aenean sed fermentum lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin tincidunt pellentesque sodales. Proin vitae tincidunt purus, in elementum ex.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Buy</h2>
+        <p>
+            Aenean porta, lacus eget pellentesque ornare, velit lorem volutpat mi, non imperdiet est ante a est. Nulla porttitor tincidunt mi, commodo sollicitudin est vehicula a. Sed commodo fermentum venenatis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque cursus, ipsum sit amet rutrum fermentum, ipsum lectus lobortis risus, non blandit lectus mi vitae sem.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <h1>BlogStart First article</h1>
+    <p>
+        Etiam sodales enim dolor, sed aliquam ante tempus consequat. Nunc vitae ex sit amet ante iaculis rhoncus. Sed tempor ullamcorper ipsum, vel vestibulum dolor consequat et. Donec luctus tortor ac lobortis lacinia. Cras posuere, diam vel pretium cursus, felis orci tincidunt sapien, non consequat diam nisl quis mauris. Cras lacus sem, imperdiet nec placerat vitae, tempor eu libero. Praesent cursus sem sed massa tempor, quis sollicitudin elit ullamcorper. Maecenas ullamcorper, orci rutrum rhoncus iaculis, magna nunc elementum dolor, quis hendrerit enim lacus eu metus. Praesent felis justo, dignissim vitae fermentum sed, auctor sit amet mi. Donec sem ipsum, porta dignissim sagittis eget, sollicitudin non lorem. Etiam non massa ut dui tincidunt ornare. Nam fringilla erat eget ex maximus sodales. Mauris eget rutrum dolor. Curabitur faucibus, orci ac consectetur ultricies, orci dui laoreet orci, in rutrum neque massa sed tellus. Maecenas nec eros ut augue consequat pretium.
+    </p>
+</div>
+
+</div>
+
+
 
 <style>
 .blogstart-nav {
-    background:#e35527;
+    background:#993300;
     border: none;
     border-radius: 0;
     color: black;
     margin-bottom: 0px;
     z-index: 10;
+    box-shadow: 2px 2px 3px black;
 }
 .navbar-brand {
     background: black;
@@ -42,29 +64,43 @@
     background: rgba(10,10,10,.2);
     color: white;
 }
-.splashscreen-wrapper {
-    position: absolute;
-    top: 0px; left: 0px;
-    z-index: 1;
-    height: 100vh;
+.splashscreen {
     width: 100%;
-    overflow: hidden;
+    height: 40vh;
+    background: linear-gradient(141deg, #0000ff 0%, #6666ff 51%, #2cb5e8 75%);;
 }
-.container1_3 {
-    position: relative;
-    height: 33vh;
+.splashcreen-logo {
+    padding-top: 50px;
+    font-size: 13em;
+    color: #993300;
+    text-align: center;
+}
+.splashcreen-logo-motto {
+    color: white;
+    text-align: center;
+    font-size: 2em;    
+}
+.splashcreen-logo-button {
+    margin-top: 80px;
+    text-align: center;
+}
+.splashscreen-message-bar {
     width: 100%;
-    text-align: center; 
-    margin-top: -20px !important;
+    padding: 20px 0px 10px 0px;
+    background: #eee;
+    color: black;
+    text-align: center;
+    font-weight: 900;
+    font-size: 14px;
+    height: auto;
+    line-height: 100%;
+    vertical-align: middle;
 }
-.container1_3 div {
-    line-height: 33vh;
+.text-accent {
+    color: #993300;
 }
-.container1_3 h1{
-    line-height: 33vh;
-}
-.textXL {
-    font-size: 150px;
-    color: #e35527;
+.summary {
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 </style>

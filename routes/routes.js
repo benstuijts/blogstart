@@ -10,7 +10,13 @@ router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 })); 
 
-
+router.get('/layout/:number', function(req, res){
+    var number = req.params.number;
+    res.render('layouts', {
+        navigation: require('../config/navigation'),
+        number: number
+    });
+});
 
 router.get('/', function(req, res){
     res.render('landingspage', {
