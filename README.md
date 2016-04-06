@@ -9,5 +9,5 @@ of
 
 ## Things to do
 
-[] User Model
+[ ] User Model
 
