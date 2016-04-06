@@ -9,7 +9,8 @@ of
 
 ## Things to do
 
-* [ ] User Model
+* [x] User Model
+* [ ] Passport.js
 * [ ] Register User
 * [ ] implement mailgun
 * [ ] Authenticate User
