@@ -4,11 +4,18 @@
 <% include profile/functions %>
 
 <div class="container">
-    
+    <br>
+    <br>
     <div class="row">
 
         <div class="col-xs-2">
-            <img class="img-responsive" src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png">
+            <% if (user.meta.gender == 0 && user.meta.avatar == 'default' || !user.meta.avatar) { %>
+            <img class="img-responsive img-circle" src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png">
+            <% } else { %>
+            <img class="img-responsive img-circle" src="http://www.koalabroker.it/wp-content/uploads/2015/08/testimonianza-donna.png">
+            <% } %>
+            
+            
         </div>        
         <div class="col-xs-10">
             <h1>Welcome <%= getUsernameOrFullName(user) %></h1>

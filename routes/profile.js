@@ -44,7 +44,7 @@ router.get('/', function(req, res) {
             lastname: 'Stuijts',
             avatar: 'default',
             age: 40,
-            gender: 0,
+            gender: 1,
             website: 'http://mentorpower.nl',
             tags: ['mentor', 'hockey', 'management', 'webdesign']
         },
@@ -72,6 +72,10 @@ router.get('/search', function(req, res) {
 router.get('/article/remove', function(req, res){
     var _id = req.query.id;
     res.send('Deleting article with id of ' + _id + ' from favorites of the user.');
+});
+
+router.post('/save', function(req, res){
+    res.send(req.body);
 });
 
 module.exports = router;

@@ -1,7 +1,69 @@
 <h2>Edit your profile</h2>
-<form method="post" action="">
-    <div class="input-group">
-        <label>label</label>
-        <input type="text" class="form-control">
+<form method="post" action="./profile/save">
+    <div class="col-sm-6">
+        <%- inputField('text', 'first name', 'firstname', user.meta.firstname) %>
+        <%- inputField('text', 'last name', 'lastname', user.meta.lastname) %>
+        <%- inputField('text', 'website', 'website', user.meta.website) %>
+    </div>    
+    <div class="col-sm-6">
+        <%- inputField('text', 'age', 'age', user.meta.age) %>
+        <%- inputField('text', 'tags', 'tags', user.meta.tags) %>
+        <%- inputField('gender', 'gender', 'gender', user.meta.gender) %>
     </div>
+    <hr>
+    <button type="submit" class="btn btn-success">Save changes</button>
 </form>
+
+
+<% function inputField(type, label, name, value) { %>
+
+    <% if(type == 'gender') { %>
+        <label><%= label %></label>
+        <div class="radio">
+            <label>
+                <% if(value==0 || !value) { %>
+                <input type="radio" name="<%= name %>" id="optionsRadios1" value="<%= value %>" checked>
+                <% } else { %>
+                <input type="radio" name="<%= name %>" id="optionsRadios1" value="<%= value %>">
+                <% } %>
+                <i class="fa fa-mars"></i> Male
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <% if(value==1 ) { %>
+                <input type="radio" name="<%= name %>" id="optionsRadios1" value="<%= value %>" checked>
+                <% } else { %>
+                <input type="radio" name="<%= name %>" id="optionsRadios1" value="<%= value %>">
+                <% } %>
+                <i class="fa fa-venus"></i> Female
+            </label>
+        </div>
+            
+    <% } %>
+
+
+    <% if(!value || value=='' || value==0 && type != 'gender') { %>
+    
+        <div class="form-group has-warning has-feedback">
+        <label class="control-label" for="inputWarning2">Input with warning</label>
+        <input type="text" class="form-control" id="inputWarning2" aria-describedby="inputWarning2Status">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+        <span id="inputWarning2Status" class="sr-only">(warning)</span>
+        </div>
+    
+    <% } else if ( type != 'gender'){ %>
+    
+        <div class="form-group has-success has-feedback">
+        <label class="control-label" for="inputSuccess2"><%= label %></label>
+        <input type="<%= type %>" class="form-control" name="<%= name %>" id="inputSuccess2" aria-describedby="inputSuccess2Status" value="<%= value %>">
+        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+        <span id="inputSuccess2Status" class="sr-only">(success)</span>
+        </div>
+        
+    <% } %>
+    
+<% } %>
+        
+
+
