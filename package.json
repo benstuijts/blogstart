@@ -25,7 +25,8 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "mongoose": "^4.4.11",
-    "multer": "^1.1.0"
+    "multer": "^1.1.0",
+    "passport": "^0.3.2"
   },
   "devDependencies": {
     "nodemon": "^1.9.1"

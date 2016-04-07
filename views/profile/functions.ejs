@@ -1,0 +1,14 @@
+<% 
+
+
+getUsernameOrFullName = function(user) {
+    if(!user.meta.firstname || user.meta.firstname == "" || user.meta.lastname == "" ) {
+        return user.local.username;
+    } else {
+        return user.meta.firstname + " " + user.meta.lastname;
+    }
+}
+
+
+
+%>

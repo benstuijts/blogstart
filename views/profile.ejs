@@ -1,0 +1,51 @@
+<% include ./_html/head %>
+<% include ./_elements/navigation-top-bar %>
+
+<% include profile/functions %>
+
+<div class="container">
+    
+    <div class="row">
+
+        <div class="col-xs-2">
+            <img class="img-responsive" src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png">
+        </div>        
+        <div class="col-xs-10">
+            <h1>Welcome <%= getUsernameOrFullName(user) %></h1>
+            
+            
+            <% user.meta.tags.forEach(function(tag) {%>
+                <a href="./profile/search?tag=<%= tag %>"><%= tag %></a> 
+            <%})%>
+            <hr>
+            @ <a href="<%= user.meta.website %>" target="_blank"><%= user.meta.website %></a>
+        </div>
+        
+    </div>
+    
+    <hr>
+    
+    <div class="row">
+        <div class="col-xs-12">
+            
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#articles" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-star"></i> Articles</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-cogs"></i> Edit profile</a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+            </ul>
+            
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="articles"><% include profile/articles %></div>
+                <div role="tabpanel" class="tab-pane" id="profile"><% include profile/edit %></div>
+                <div role="tabpanel" class="tab-pane" id="messages">messages...</div>
+                <div role="tabpanel" class="tab-pane" id="settings">settings...</div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+
+<% include ./_html/scripts %>
+

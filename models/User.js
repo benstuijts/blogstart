@@ -1,15 +1,30 @@
 const mongoose  = require('mongoose');
 const bcrypt    = require('bcrypt');
 var userSchema  = mongoose.Schema({
-    
+ 
     local: {
         username: String,
         password: String,    
     },
     
+    facebook: {
+		id: String,
+		token: String,
+		email: String,
+		name: String
+	},
+	
+	google: {
+		id: String,
+		token: String,
+		email: String,
+		name: String
+	},
+    
     meta: {
-        firstname: String,
-        lastname: String,
+        firstname: { type: String, default: ""},
+        lastname: { type: String, default: ""},
+        avatar: { type: String, default: "default"},
         age: Number,
         gender: Number,
         website: String,
@@ -28,12 +43,24 @@ var userSchema  = mongoose.Schema({
 
 userSchema.statics = require('../modules/mongoose-statics');
 
-userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
+userSchema.methods.generateHash = function(password){
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
 };
 
-userSchema.methods.validePassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+userSchema.methods.validPassword = function(password){
+	return bcrypt.compareSync(password, this.local.password);
+};
+
+userSchema.methods.getFullName = function() {
+    return this.meta.firstname + " " + this.meta.lastname;
+};
+
+userSchema.methods.getUsernameOrFullName = function() {
+    if(this.getFullName!="") {
+        return this.getFullName();
+    } else {
+        return this.local.username;
+    }
 };
 
 module.exports = mongoose.model('User', userSchema);

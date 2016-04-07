@@ -1,0 +1,88 @@
+<% include ../_html/head %>
+<% include ../_elements/navigation-top-bar %>
+
+<div class="container">
+    
+    <h1>Welcome to <%= name %></h1>
+    <h2><%= tagline %></h2>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4 text-muted">
+            <div class="media">
+                <div class="media-left">
+                    <i class="fa fa-user fa-3x"></i>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">Step 1:</h4>
+                    Set up a personal account
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 text-muted">
+            <div class="media">
+                <div class="media-left">
+                    <i class="fa fa-unlock fa-3x"></i>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">Step 2:</h4>
+                    Authenticate your account
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 bg-info">
+            <div class="media">
+                <div class="media-left">
+                    <i class="fa fa-rocket fa-3x"></i>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">Step 3:</h4>
+                    Start your learning experience
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h3>Login to your personal account</h3>
+    
+    <div class="row">
+        <div class="col-sm-6 col-md-5">
+            <form method="post" action="./login">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-control" value="<%= username %>" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" value="<%= password %>" disabled>
+                </div>
+                
+            
+                <br><br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-lg">Login</button>
+                </div>
+            </form>    
+        </div> 
+        <div class="col-sm-6 col-md-4 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Additional information</h3>
+                </div>
+                <div class="panel-body">
+                    Aenean fermentum tempus ipsum, id ornare turpis blandit in. Nullam varius pellentesque sem, non luctus leo aliquam id. In finibus ac justo et commodo. Aliquam erat volutpat. Cras vitae metus in purus volutpat sagittis sit amet ut ex. Donec mattis tempus risus scelerisque molestie. Nulla facilisi.
+                </div>
+                
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="fa fa-check text-success"></i> Easy to use</li>
+                    <li class="list-group-item"><i class="fa fa-check text-success"></i> Always up to date</li>
+                    <li class="list-group-item"><i class="fa fa-check text-success"></i> Great feature</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+</div>
+
+<% include ../_html/scripts %>

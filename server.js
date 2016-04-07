@@ -11,6 +11,10 @@ const http      = require("http");
 const express   = require("express");
 const app       = express();
 const init      = require("./config/init");
+const passport  = require('passport');
+
+/* Configuration */
+const navigation = require('./config/navigation');
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -24,11 +28,18 @@ const configuration = function(req,res, next) {
     for(var key in obj) {
       this[key] = obj[key];
     }
-  }
+  };
+  res.locals['navigation']= navigation,
   next();
-}
+};
+
+var auth = express.Router();
+require('./routes/auth.js')(auth, passport);
+app.use('/auth', configuration,auth);
+
 
 app.use('/admin', configuration, require('./routes/admin'));
+app.use('/profile', configuration, require('./routes/profile'));
 app.use('/'     , configuration, require('./routes/routes'));
 
 app.listen(8080, function () {

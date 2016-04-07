@@ -4,6 +4,7 @@ module.exports = {
         name: "Blogstart",
         author: "Ben Stuijts",
         baseUrl: "https://blogstart2016-stuijts.c9users.io/",
+        tagline: "This is a great tagline!",
         contact: {
             email: "benstuijts@mentorpower.nl",
             telephone: "0031651363602",
