@@ -12,7 +12,7 @@ of
 * [x] User Model
 * [x] Passport.js
 * [ ] Register User
-* [ ] implement mailgun
+* [ ] implement mailgun http://blog.mailgun.com/how-to-send-transactional-emails-in-a-nodejs-app-using-the-mailgun-api/
 * [ ] Authenticate User
 * [ ] Login User
 * [x] User profile Page
