@@ -10,12 +10,12 @@ of
 ## Things to do
 
 * [x] User Model
-* [ ] Passport.js
+* [x] Passport.js
 * [ ] Register User
 * [ ] implement mailgun
 * [ ] Authenticate User
 * [ ] Login User
-* [ ] User profile Page
+* [x] User profile Page
 * [ ] Like article
 * [ ] Save favorite article
 * [ ] Comment article
