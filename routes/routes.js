@@ -39,7 +39,6 @@ router.get('/layout/:number', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    req.flash('message', 'success|Hello');
     res.render('landingspage', {
         navigation: require('../config/navigation'),
         message: req.flash('message')

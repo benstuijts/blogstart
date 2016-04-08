@@ -32,16 +32,23 @@
     
 </div>
 <div class="splashscreen-message-bar">
-    <h2>Welcome</h2>
-    <p>
+    
+    
+    
         <% if(message == '') { %>
-            This is just an other message from <span class="text-accent">BlogStart</span>
+            <h2>Welcome</h2>
+            <p>
+                This is just an other message from <span class="text-accent">BlogStart</span>
+            </p>
+            
         <% } else { %>
-            <%= 
-                message
-            %>
+            <p>
+                <%= message %>
+            </p>
+            
+            
         <% } %>
-    </p>
+        
 </div>
 
 <div class="container">

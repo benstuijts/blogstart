@@ -44,7 +44,10 @@ module.exports = function(router, passport){
 	
 	//localhost:8080/auth/signup
 	router.get('/signup', function(req, res){
-		res.render('auth/signup.ejs', { message: req.flash('message') });
+		
+		res.render('auth/signup.ejs', { 
+			message: req.flash('message') 
+		});
 	});
 	
 	router.post('/signup', passport.authenticate('signup', {
