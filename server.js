@@ -12,9 +12,21 @@ const express   = require("express");
 const app       = express();
 const init      = require("./config/init");
 const passport  = require('passport');
+var session = require('express-session');
+var flash = require('connect-flash');
+
 
 /* Configuration */
+app.use(session({secret: 'anystringoftext',
+				 saveUninitialized: true,
+				 resave: true
+}));				
 const navigation = require('./config/navigation');
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
 
 app.set('view engine', 'ejs');
 app.set('views', './views');

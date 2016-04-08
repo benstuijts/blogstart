@@ -4,7 +4,9 @@ var userSchema  = mongoose.Schema({
  
     local: {
         username: String,
-        password: String,    
+        email: String,
+        password: String,
+        activationKey: {type: String, default: randomString(64)}
     },
     
     facebook: {

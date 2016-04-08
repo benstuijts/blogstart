@@ -22,6 +22,28 @@ module.exports = {
         database: {
             url: "mongodb://188.166.89.80/blogstart"
         },
+        email: {
+            service: 'mailgun',
+            url: 'https://www.mailgun.com/',
+            login: {
+                username: 'hockeytips@mentorpower.nl',
+                password: ''
+            },
+            domain: 'sandboxb0f47cd8d2d144308e7cdd9c4ea3e1d6.mailgun.org',
+            api_key: 'key-80f4c90878ac204451b9080ebd53c1b1',
+            from_who: 'auth@blogstart.com'
+        },
+        facebookAuth: {
+            clientID: '123',
+            clientSecret: '',
+            callbackURL: ''
+        },
+        googleAuth: {
+            clientID: '123',
+            clientSecret: '',
+            callbackURL: ''
+        },
+        
         administrator: {
             username: 'bens',
             password: '14303963',

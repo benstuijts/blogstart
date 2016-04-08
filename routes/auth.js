@@ -1,3 +1,5 @@
+const User = require('../models/User');
+
 module.exports = function(router, passport){
     
 	//localhost:8080/auth/
@@ -7,18 +9,39 @@ module.exports = function(router, passport){
 	
 	//localhost:8080/auth/login
 	router.get('/login', function(req, res){
-		res.render('login.ejs', { message: req.flash('loginMessage') });
+		res.render('login.ejs');
 	});
 	router.post('/login', passport.authenticate('local-login', {
 		successRedirect: '/profile',
 		failureRedirect: '/login',
 		failureFlash: true
 	}));
-
+	
+	/* Development Only */
+	router.get('/allusers', function(req, res) {
+		User.find({}, function(err, users){
+			if(err) throw err;
+			res.send(users);
+		});
+	});
+	/* END Development Only */
+	
+	
 	//localhost:8080/auth/signup
 	router.get('/signup', function(req, res){
-		res.render('auth/signup.ejs');
+		res.render('auth/signup.ejs', { message: req.flash('signupMessage') });
 	});
+	
+	var check = function(req, res, next) {
+		console.log('POST ON /AUTH/SIGNUP! ');
+		next();
+	};
+	
+	router.post('/signup', passport.authenticate('local-signup', {
+		successRedirect: './authenticate',
+		failureRedirect: './signup',
+		failureFlash: true
+	}));
 	
 	router.get('/authenticate', function(req, res){
 		var username = req.query.username;
@@ -27,9 +50,20 @@ module.exports = function(router, passport){
 	});
 	
 	router.post('/authenticate', function(req, res){
-		var username = 'username dummy';
-		var password = 'password';
-		res.render('auth/first-login', { username: username, password: password});
+		var username = req.body.username;
+		var activationKey = req.body.activationKey;
+		
+		User.findOne({ 
+			'local.activationKey': activationKey
+		}, function(err, user){
+			if(err) {
+				
+			} else {
+				res.render('auth/first-login', { username: user.local.username, password: user.local.password});
+			}
+		});
+		
+		
 	});
 	
 	router.get('/privacy-policy', function(req, res){
@@ -38,12 +72,6 @@ module.exports = function(router, passport){
 	router.get('/terms-of-service', function(req, res){
 		res.render('auth/terms');
 	});
-
-	router.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/',
-		failureRedirect: '/',
-		failureFlash: true
-	}));
 
 	// router.get('/profile', isLoggedIn, function(req, res){
 	// 	res.render('profile.ejs', { user: req.user });
@@ -67,7 +95,7 @@ module.exports = function(router, passport){
 	router.get('/connect/google', passport.authorize('google', { scope: ['profile', 'email'] }));
 
 	router.get('/connect/local', function(req, res){
-		res.render('connect-local.ejs', { message: req.flash('signupMessage')});
+		res.render('connect-local.ejs');
 	});
 
 	router.post('/connect/local', passport.authenticate('local-signup', {
