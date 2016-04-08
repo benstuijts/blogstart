@@ -49,7 +49,6 @@ var auth = express.Router();
 require('./routes/auth.js')(auth, passport);
 app.use('/auth', configuration,auth);
 
-
 app.use('/admin', configuration, require('./routes/admin'));
 app.use('/profile', configuration, require('./routes/profile'));
 app.use('/'     , configuration, require('./routes/routes'));

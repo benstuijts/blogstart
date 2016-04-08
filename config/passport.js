@@ -27,55 +27,80 @@ module.exports = function(passport) {
 	});
 
 
-	passport.use('local-signup', new LocalStrategy({
-		usernameField: 'username',
-		passwordField: 'password',
-		passReqToCallback: true
-	},
-	function(req, username, password, done){
-		process.nextTick(function(){
-			User.findOne({'local.username': username}, function(err, user){
-				if(err) {
-					console.log('ERROR: ' + err);
-					return done(err);
-				}
-					
-				if(user){
-					return done(null, false, req.flash('signupMessage', 'That email already taken'));
-				} 
-				if(!req.user) {
-					var newUser = new User();
-					var email = 'b.stuijts@upcmail.nl';
-					newUser.local.username = username;
-					newUser.local.email = email;
-					newUser.local.password = newUser.generateHash(password);
+	/* http://passportjs.org/docs */
 
-					newUser.save(function(err){
-						if(err)
-							throw err;
-						/* Send Activation Email */
-						sendActivationEmail(newUser, function(err) {
-							if(err) return done(err);
-							return done(null, newUser);
-						});
-						
-						
-					})
-				} else {
-					var user = req.user;
-					user.local.username = username;
-					user.local.password = user.generateHash(password);
+	/* http://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619 */
 
-					user.save(function(err){
-						if(err)
-							throw err;
-						return done(null, user);
-					})
-				}
-			})
+passport.use('signup', new LocalStrategy({
+    passReqToCallback : true
+  },
+  function(req, username, password, done) {
+    const findOrCreateUser = function(){
+      // find a user in Mongo with provided username
+      User.findOne({'local.username':username},function(err, user) {
+        // In case of any error return
+        if (err){
+          console.log('Error in SignUp: '+err);
+          return done(err);
+        }
+        // already exists
+        if (user) {
+          console.log('User already exists');
+          return done(null, false, 
+             req.flash('message','User Already Exists'));
+        } else {
+       		var newUser = new User();
+        		newUser.local.username 	= username;
+          		newUser.local.password 	= newUser.generateHash(password);
+          		newUser.local.email 	= req.body.email;
+        	
+        	sendActivationEmail(newUser, function(err) {
+        		
+        		if(err) {
+        			return done(null, false, req.flash('message',{type: 'warning', body: "Sendind email with activation key failed."}));
+        		}
+        		
+        		newUser.save(function(err){
+        			if(err) {
+        				return(null, false, req.flash('message', { type: 'warning', body: 'DB ERROR: ' + err}));
+        			}
+        			return done(null, newUser, req.flash('message', { type: 'success', body: 'Hurray! Account created!'}));
+        		});
+        		
+        		
+        	});
 
-		});
-	}));
+        }
+      });
+    };
+     
+    // Delay the execution of findOrCreateUser and execute 
+    // the method in the next tick of the event loop
+    process.nextTick(findOrCreateUser);
+  })
+);
+
+passport.use('login', new LocalStrategy({
+    passReqToCallback : true
+  },
+  function(req, username, password, done) {
+  	const findUser = function(){
+  		User.findOne({'local.username': username} , function(err, user){
+  			if(err) {
+  				return done(err, false, req.flash('message', 'ERROR: ' + err));	
+  			}
+  			if(!user) {
+  				return done(null, false, req.flash('message', 'No user found.'));
+  			}
+  			if(!user.validPassword(password)) {
+  				return done(null, false, req.flash('message', 'Invalid Password'));
+  			} else {
+  				return done(null, user);
+  			}
+  		});
+  	};
+    process.nextTick(findUser);
+}));
 
 	passport.use('local-login', new LocalStrategy({
 			usernameField: 'username',
@@ -238,9 +263,12 @@ function sendActivationEmail(user, cb) {
 	var data = {
 		from: init[config['mode']].email.from_who,
 		to: user.local.email,
-		subject: 'Activate your account',
-		html: 'Hello, please activate your account by clicking this <a href="' + activationUrl +'">link</a>, or copy this URL in your browser: ' + activationUrl
-    };
+		subject: 'Hello from Mailgun',
+      	html: 'Hello, This is not a plain-text email, I wanted to test some spicy Mailgun sauce in NodeJS! <a href="http://0.0.0.0:3030/validate?' + activationUrl + '">Click here to add your email address to a mailing list</a>'
+    }
+    
+    console.log('sending email, with URL: ' + activationUrl);
+    
     mailgun.messages().send(data, function (err, body) {
         if (err) {
             cb(true);

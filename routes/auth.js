@@ -1,6 +1,13 @@
-const User = require('../models/User');
+const User 			= require('../models/User');
+const bodyParser 	= require('body-parser');
 
 module.exports = function(router, passport){
+    
+    /* Middleware */
+	router.use(bodyParser.json()); // to support JSON-encoded bodies
+	router.use(bodyParser.urlencoded({ // to support URL-encoded bodies
+	    extended: true
+	}));
     
 	//localhost:8080/auth/
 	router.get('/', function(req, res){
@@ -8,12 +15,14 @@ module.exports = function(router, passport){
 	});
 	
 	//localhost:8080/auth/login
-	router.get('/login', function(req, res){
-		res.render('login.ejs');
-	});
-	router.post('/login', passport.authenticate('local-login', {
-		successRedirect: '/profile',
-		failureRedirect: '/login',
+	//router.get('/login', function(req, res){
+//		res.render('/', { message: req.flash('message') });/
+//	});
+	
+
+	router.post('/login', passport.authenticate('login', {
+		successRedirect: './profile',
+		failureRedirect: '/',
 		failureFlash: true
 	}));
 	
@@ -21,7 +30,13 @@ module.exports = function(router, passport){
 	router.get('/allusers', function(req, res) {
 		User.find({}, function(err, users){
 			if(err) throw err;
-			res.send(users);
+			res.send('<pre>' + users + '</pre>');
+		});
+	});
+	router.get('/delusers', function(req, res) {
+		User.remove({}, function(err){
+			if(err) throw err;
+			res.send('all users deleted. <a href="./allusers">Check all users</a>');
 		});
 	});
 	/* END Development Only */
@@ -29,24 +44,20 @@ module.exports = function(router, passport){
 	
 	//localhost:8080/auth/signup
 	router.get('/signup', function(req, res){
-		res.render('auth/signup.ejs', { message: req.flash('signupMessage') });
+		res.render('auth/signup.ejs', { message: req.flash('message') });
 	});
 	
-	var check = function(req, res, next) {
-		console.log('POST ON /AUTH/SIGNUP! ');
-		next();
-	};
+	router.post('/signup', passport.authenticate('signup', {
+    	successRedirect: '/',
+    	failureRedirect: './signup',
+    	failureFlash : true 
+  	}));
 	
-	router.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: './authenticate',
-		failureRedirect: './signup',
-		failureFlash: true
-	}));
-	
+
 	router.get('/authenticate', function(req, res){
-		var username = req.query.username;
-		var activationcode = req.query.activationcode;
-		res.render('auth/authenticate.ejs', { username: username, activationcode: activationcode });
+		var username 		= req.query.username;
+		var activationKey 	= req.query.activationKey;
+		res.render('auth/authenticate.ejs', { username: username, activationKey: activationKey, message: req.flash('message') });
 	});
 	
 	router.post('/authenticate', function(req, res){
@@ -73,9 +84,9 @@ module.exports = function(router, passport){
 		res.render('auth/terms');
 	});
 
-	// router.get('/profile', isLoggedIn, function(req, res){
+	//router.get('/profile', isLoggedIn, function(req, res){
 	// 	res.render('profile.ejs', { user: req.user });
-	// });
+	//});
 	
 	router.get('/facebook', passport.authenticate('facebook', {scope: ['email']}));
 

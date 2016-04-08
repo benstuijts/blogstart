@@ -39,8 +39,10 @@ router.get('/layout/:number', function(req, res) {
 });
 
 router.get('/', function(req, res) {
+    req.flash('message', 'success|Hello');
     res.render('landingspage', {
-        navigation: require('../config/navigation')
+        navigation: require('../config/navigation'),
+        message: req.flash('message')
     });
 });
 
@@ -59,6 +61,7 @@ router.get('*', function(req, res) {
             else {
                 res.render('article', {
                     navigation: require('../config/navigation'),
+                    message: req.flash('message'),
                     article: article[0],
                 });
             }

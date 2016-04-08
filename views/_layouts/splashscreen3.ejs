@@ -12,12 +12,12 @@
                 <a class="btn btn-default btn-lg" href="auth/signup">Sign up for <span class="text-accent">Blogstart</span></a>
             </div>
             <div class="col-md-4 col-md-offset-2 splashscreen-right">
-                <form method="post" action=".\auth\login">
+                <form method="post" action="./auth/login">
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Username">
+                        <input class="form-control" name="username "type="text" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" placeholder="Password">
+                        <input class="form-control" name="password" type="password" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-block btn-success btn-lg">Login</button>
@@ -34,7 +34,13 @@
 <div class="splashscreen-message-bar">
     <h2>Welcome</h2>
     <p>
-        This is just an other message from <span class="text-accent">BlogStart</span>
+        <% if(message == '') { %>
+            This is just an other message from <span class="text-accent">BlogStart</span>
+        <% } else { %>
+            <%= 
+                message
+            %>
+        <% } %>
     </p>
 </div>
 
