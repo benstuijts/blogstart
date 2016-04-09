@@ -19,6 +19,16 @@ process.argv.slice(2).forEach(function(value) {
   config[key] = val;
 });
 
+function handleMessage(req) {
+    return {
+        "success"   : req.flash("success"),
+        "info"      : req.flash("info") || req.flash("message"),
+        "warning"   : req.flash("warning"),
+        "error"     : req.flash("error"),
+        "message"   : req.flash("message")
+    };
+}
+
 var storage = multer.diskStorage({
   destination: './public/images/uploads/',
   filename: function (req, file, cb) {
@@ -62,7 +72,7 @@ var checkToken = function(req, res, next) {
     var message = { type: 'warning', body: null, icon: 'exclamation-triangle'};
     if(req.body.token !== init[config['mode']].administrator.token) {
         message.body = 'Token error';
-        login_form(res, {message: message});
+        login_form(res, {message: handleMessage(req)});
     }
     next();
 }

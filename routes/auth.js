@@ -30,11 +30,7 @@ function handleMessage(req) {
 //	});
 	
 
-	router.post('/login', passport.authenticate('login', {
-		successRedirect: './profile',
-		failureRedirect: '/',
-		failureFlash: true
-	}));
+
 	
 	/* Development Only */
 	router.get('/allusers', function(req, res) {
@@ -59,6 +55,12 @@ function handleMessage(req) {
 			message: handleMessage(req) 
 		});
 	});
+
+	router.post('/login', passport.authenticate('login', {
+		successRedirect: '/profile',
+		failureRedirect: '/',
+		failureFlash: true
+	}));
 	
 	router.post('/signup', passport.authenticate('signup', {
     	successRedirect: '/',

@@ -1,9 +1,8 @@
-var LocalStrategy       = require('passport-local').Strategy;
-var FacebookStrategy    = require('passport-facebook').Strategy;
-var GoogleStrategy      = require('passport-google-oauth').OAuth2Strategy;
-var User                = require('../models/User');
-//var configAuth          = require('./auth');
-var Mailgun 			= require('mailgun-js');
+const LocalStrategy     = require('passport-local').Strategy;
+const FacebookStrategy	= require('passport-facebook').Strategy;
+const GoogleStrategy    = require('passport-google-oauth').OAuth2Strategy;
+const User              = require('../models/User');
+const Mailgun 			= require('mailgun-js');
 const init      		= require("./init");
 
 var config = [];
@@ -14,8 +13,7 @@ process.argv.slice(2).forEach(function(value) {
 });
 
 module.exports = function(passport) {
-
-
+	
 	passport.serializeUser(function(user, done){
 		done(null, user.id);
 	});
@@ -28,108 +26,84 @@ module.exports = function(passport) {
 
 
 	/* http://passportjs.org/docs */
-
 	/* http://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619 */
+
+function validate(req, username, password) {
+	return new Promise(function(resolve, reject){
+		if(password.length < 2 ) {
+			reject('Password length minimum of 8 characters.');
+		}
+		resolve();
+	});
+}
+
+function findOrCreateUser(req, username, password) {
+	return new Promise(function(resolve, reject){
+		User.findOne({ 'local.username': username},
+		function(error, user){
+			if(error) { reject('Error: ' + error); }
+			if(user) { reject('This user already exists');
+				
+			} else {
+			var newUser = new User();
+        		newUser.local.username 	= username;
+          		newUser.local.password 	= newUser.generateHash(password);
+          		newUser.local.email 	= req.body.email;
+          		newUser.save(function(error){
+          			if(error) { reject('Database Error!');}
+          			resolve(newUser);
+          		});
+			}
+		});
+	});
+}
+
+function findUser(req, username, password) {
+	return new Promise(function(resolve, reject){
+		User.findOne({'local.username': username}, function(error, user){
+			console.log('finding ' + username + ' in database ' + error + user);
+			if(error) { reject('Error: ' + error); }
+			if(!user) { reject('No ' + username + ' found.'); }
+			if(!user.validPassword(password)) { reject('Invalid Password'); 
+			} else {
+				resolve(user);
+			}
+		});
+	});
+}
+
 
 passport.use('signup', new LocalStrategy({
     passReqToCallback : true
   },
   function(req, username, password, done) {
-    const findOrCreateUser = function(){
-    	/* Validate input */
-    	if(password.length < 2) {
-    		return done(null, false, req.flash('warning', 'Password length minimum of 8 characters.'));
-    	}
-    	
-    	
-      // find a user in Mongo with provided username
-      User.findOne({'local.username':username},function(err, user) {
-        // In case of any error return
-        if (err){
-          console.log('Error in SignUp: '+err);
-          return done(err);
-        }
-        // already exists
-        if (user) {
-          console.log('User already exists');
-          return done(null, false, 
-             req.flash('message','User Already Exists'));
-        } else {
-       		var newUser = new User();
-        		newUser.local.username 	= username;
-          		newUser.local.password 	= newUser.generateHash(password);
-          		newUser.local.email 	= req.body.email;
-        	
-        	sendActivationEmail(newUser, function(err) {
-        		
-        		if(err) {
-        			return done(null, false, req.flash('error','Sending email with activation key failed.'));
-        		}
-        		
-        		newUser.save(function(err){
-        			if(err) {
-        				return(null, false, req.flash('error', 'DB ERROR: ' + err));
-        			}
-        			return done(null, newUser, req.flash('success', 'Hurray! Account created!'));
-        		});
-        		
-        		
-        	});
-
-        }
-      });
-    };
-     
-    // Delay the execution of findOrCreateUser and execute 
-    // the method in the next tick of the event loop
-    process.nextTick(findOrCreateUser);
+    	validate(req, username, password)
+    	.then(function(result){
+    		return findOrCreateUser(req, username, password);
+    	})
+    	.then(function(newUser) {
+    		return done(null, newUser, req.flash('success', 'Hurray! Account created!'));
+    	})
+    	.catch(function(error){
+    		console.log('promise rejected');
+    		return done(null, false, req.flash('warning', error));
+    	});
   })
 );
 
 passport.use('login', new LocalStrategy({
     passReqToCallback : true
-  },
-  function(req, username, password, done) {
-  	const findUser = function(){
-  		User.findOne({'local.username': username} , function(err, user){
-  			if(err) {
-  				return done(err, false, req.flash('error', 'ERROR: ' + err));	
-  			}
-  			if(!user) {
-  				return done(null, false, req.flash('warning', 'No user found.'));
-  			}
-  			if(!user.validPassword(password)) {
-  				return done(null, false, req.flash('warning', 'Invalid Password'));
-  			} else {
-  				return done(null, user);
-  			}
-  		});
-  	};
-    process.nextTick(findUser);
+  }, function(req, username, password, done) {
+	findUser(req,username, password)
+	.then(function(user){
+		console.log('user found login...');
+		return done(null, user);
+	})
+	.catch(function(error){
+    	console.log('promise rejected');
+    	return done(null, false, req.flash('warning', error));
+    });
 }));
-
-	passport.use('local-login', new LocalStrategy({
-			usernameField: 'username',
-			passwordField: 'password',
-			passReqToCallback: true
-		},
-		function(req, username, password, done){
-			process.nextTick(function(){
-				User.findOne({ 'local.username': username}, function(err, user){
-					if(err)
-						return done(err);
-					if(!user)
-						return done(null, false);
-					if(!user.validPassword(password)){
-						return done(null, false);
-					}
-					return done(null, user);
-
-				});
-			});
-		}
-	));
-
 
 	passport.use(new FacebookStrategy({
 	    clientID: init[config['mode']].facebookAuth.clientID,
