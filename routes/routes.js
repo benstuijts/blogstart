@@ -13,6 +13,15 @@ router.use(bodyParser.urlencoded({ // to support URL-encoded bodies
     extended: true
 }));
 
+function handleMessage(req) {
+    return {
+        "success" : req.flash("success"),
+        "info" : req.flash("info") || req.flash("message"),
+        "warning" : req.flash("warning"),
+        "error" : req.flash("warning"),
+    }
+}
+
 router.use(function(req, res, next) {
 
     var u = url.format({
@@ -41,7 +50,7 @@ router.get('/layout/:number', function(req, res) {
 router.get('/', function(req, res) {
     res.render('landingspage', {
         navigation: require('../config/navigation'),
-        message: req.flash('message')
+        message: handleMessage(req)
     });
 });
 
