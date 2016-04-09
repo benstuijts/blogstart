@@ -15,16 +15,17 @@ router.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 
 function handleMessage(req) {
     return {
-        "success" : req.flash("success"),
-        "info" : req.flash("info") || req.flash("message"),
-        "warning" : req.flash("warning"),
-        "error" : req.flash("warning"),
-    }
+        "success"   : req.flash("success"),
+        "info"      : req.flash("info") || req.flash("message"),
+        "warning"   : req.flash("warning"),
+        "error"     : req.flash("error"),
+        "message"   : req.flash("message")
+    };
 }
 
 router.use(function(req, res, next) {
 
-    var u = url.format({
+    const u = url.format({
         protocol: req.protocol,
         host: req.get('host'),
         pathname: req.originalUrl
@@ -48,6 +49,11 @@ router.get('/layout/:number', function(req, res) {
 });
 
 router.get('/', function(req, res) {
+    req.flash('success', 'there was a great succes today!');
+    req.flash('success', 'there was an other great succes today!');
+    req.flash('info', 'this is great information for you!');
+    req.flash('warning', 'oops, something went wrong...');
+    req.flash('error', 'oh no, an error occured!');
     res.render('landingspage', {
         navigation: require('../config/navigation'),
         message: handleMessage(req)

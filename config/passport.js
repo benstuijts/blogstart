@@ -38,7 +38,7 @@ passport.use('signup', new LocalStrategy({
     const findOrCreateUser = function(){
     	/* Validate input */
     	if(password.length < 2) {
-    		return done(null, false, req.flash('message', 'Password length minimum of 8 characters.'));
+    		return done(null, false, req.flash('warning', 'Password length minimum of 8 characters.'));
     	}
     	
     	
@@ -63,14 +63,14 @@ passport.use('signup', new LocalStrategy({
         	sendActivationEmail(newUser, function(err) {
         		
         		if(err) {
-        			return done(null, false, req.flash('message','Sending email with activation key failed.'));
+        			return done(null, false, req.flash('error','Sending email with activation key failed.'));
         		}
         		
         		newUser.save(function(err){
         			if(err) {
-        				return(null, false, req.flash('message', 'DB ERROR: ' + err));
+        				return(null, false, req.flash('error', 'DB ERROR: ' + err));
         			}
-        			return done(null, newUser, req.flash('message', 'Hurray! Account created!'));
+        			return done(null, newUser, req.flash('success', 'Hurray! Account created!'));
         		});
         		
         		
@@ -93,13 +93,13 @@ passport.use('login', new LocalStrategy({
   	const findUser = function(){
   		User.findOne({'local.username': username} , function(err, user){
   			if(err) {
-  				return done(err, false, req.flash('message', 'ERROR: ' + err));	
+  				return done(err, false, req.flash('error', 'ERROR: ' + err));	
   			}
   			if(!user) {
-  				return done(null, false, req.flash('message', 'No user found.'));
+  				return done(null, false, req.flash('warning', 'No user found.'));
   			}
   			if(!user.validPassword(password)) {
-  				return done(null, false, req.flash('message', 'Invalid Password'));
+  				return done(null, false, req.flash('warning', 'Invalid Password'));
   			} else {
   				return done(null, user);
   			}

@@ -68,12 +68,9 @@
                 </div>
             </form>
             
-            <div class="alert alert-warning">
-                <%- message %>
-            </div>
-            <div class="alert alert-<%= message[0] %>">
-                <%= message[1] %>
-            </div>
+            <% include ../_elements/message-bar %>
+            
+            
 
             
         </div> 

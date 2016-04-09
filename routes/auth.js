@@ -8,6 +8,16 @@ module.exports = function(router, passport){
 	router.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 	    extended: true
 	}));
+
+function handleMessage(req) {
+    return {
+        "success"   : req.flash("success"),
+        "info"      : req.flash("info") || req.flash("message"),
+        "warning"   : req.flash("warning"),
+        "error"     : req.flash("error"),
+        "message"   : req.flash("message")
+    };
+}
     
 	//localhost:8080/auth/
 	router.get('/', function(req, res){
@@ -46,7 +56,7 @@ module.exports = function(router, passport){
 	router.get('/signup', function(req, res){
 		
 		res.render('auth/signup.ejs', { 
-			message: req.flash('message') 
+			message: handleMessage(req) 
 		});
 	});
 	
@@ -60,7 +70,7 @@ module.exports = function(router, passport){
 	router.get('/authenticate', function(req, res){
 		var username 		= req.query.username;
 		var activationKey 	= req.query.activationKey;
-		res.render('auth/authenticate.ejs', { username: username, activationKey: activationKey, message: req.flash('message') });
+		res.render('auth/authenticate.ejs', { username: username, activationKey: activationKey, message: handleMessage(req) });
 	});
 	
 	router.post('/authenticate', function(req, res){
@@ -73,7 +83,7 @@ module.exports = function(router, passport){
 			if(err) {
 				
 			} else {
-				res.render('auth/first-login', { username: user.local.username, password: user.local.password});
+				res.render('auth/first-login', { username: user.local.username, password: user.local.password, message: handleMessage(req)});
 			}
 		});
 		

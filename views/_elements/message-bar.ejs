@@ -1,0 +1,33 @@
+<div class="messageBar">
+    <% if(message.success != '') { %>
+        <div class="alert alert-success">
+            <i class="fa fa-thumbs-o-up"></i> 
+            <%= message.success %> 
+        </div>
+    <% } %>
+    <% if(message.info != '') { %>
+        <div class="alert alert-info">
+            <i class="fa fa-info-circle"></i> 
+            <%= message.info %> 
+        </div>
+    <% } %>
+    <% if(message.message != '') { %>
+        <div class="alert alert-default">
+            <i class="fa fa-tachometer"></i> 
+            <%= message.message %> 
+        </div>
+    <% } %>
+    <% if(message.warning != '') { %>
+        <div class="alert alert-warning">
+            <i class="fa fa-exclamation-triangle"></i> 
+            <%= message.warning %> 
+        </div>
+    <% } %>
+    <% if(message.error != '') { %>
+        <div class="alert alert-danger">
+            <i class="fa fa-exclamation-triangle faa-flash animated"></i> 
+            <%= message.error %> 
+        </div>
+    <% } %>
+    
+</div>
