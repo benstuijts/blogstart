@@ -68,6 +68,10 @@ function handleMessage(req) {
     	failureFlash : true 
   	}));
 	
+	router.get('/logout', function(req, res){
+		req.logout();
+		res.redirect('/');
+	})
 
 	router.get('/authenticate', function(req, res){
 		var username 		= req.query.username;
@@ -167,8 +171,5 @@ function handleMessage(req) {
 		});
 	});
 
-	router.get('/logout', function(req, res){
-		req.logout();
-		res.redirect('/');
-	})
+
 };

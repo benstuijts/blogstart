@@ -32,7 +32,8 @@ router.use(function(req, res, next) {
     });
 
     res.locals.add({
-        url: u
+        url: u,
+        isAuthenticated: req.isAuthenticated()
     });
 
     next();
@@ -49,11 +50,6 @@ router.get('/layout/:number', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    req.flash('success', 'there was a great succes today!');
-    req.flash('success', 'there was an other great succes today!');
-    req.flash('info', 'this is great information for you!');
-    req.flash('warning', 'oops, something went wrong...');
-    req.flash('error', 'oh no, an error occured!');
     res.render('landingspage', {
         navigation: require('../config/navigation'),
         message: handleMessage(req)

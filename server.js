@@ -41,7 +41,7 @@ const configuration = function(req,res, next) {
       this[key] = obj[key];
     }
   };
-  res.locals['navigation']= navigation,
+  res.locals['navigation'] = navigation,
   next();
 };
 

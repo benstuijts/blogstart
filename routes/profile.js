@@ -13,6 +13,16 @@ router.use(bodyParser.urlencoded({ // to support URL-encoded bodies
     extended: true
 }));
 
+function handleMessage(req) {
+    return {
+        "success"   : req.flash("success"),
+        "info"      : req.flash("info") || req.flash("message"),
+        "warning"   : req.flash("warning"),
+        "error"     : req.flash("error"),
+        "message"   : req.flash("message")
+    };
+}
+
 router.use(function(req, res, next) {
 
     var u = url.format({
@@ -22,59 +32,40 @@ router.use(function(req, res, next) {
     });
 
     res.locals.add({
-        url: u
+        url: u,
+        isAuthenticated:  req.isAuthenticated()
     });
 
     next();
 });
 
-router.get('/', function(req, res) {
+var isAuthenticated = function (req, res, next) {
+  if (req.isAuthenticated())
+    return next();
+  res.redirect('/');
+}
 
-    var user = new User();
-
-
-    user = {
-        local: {
-            username: 'benstuijts',
-            password: 'ben123'
-        },
-
-        meta: {
-            firstname: 'Ben',
-            lastname: 'Stuijts',
-            avatar: 'default',
-            age: 40,
-            gender: 1,
-            website: 'http://mentorpower.nl',
-            tags: ['mentor', 'hockey', 'management', 'webdesign']
-        },
-        articles: {
-            favorite: [
-                { title: 'first great article', slug: 'first-article', id: 0},
-                { title: 'Second great article', slug: 'second-article', id: 1},
-                { title: 'About something great', slug: 'about', id:2}
-            ],
-            liked: [2, 3]
-        },
-
-    };
+router.get('/', isAuthenticated, function(req, res) {
+    
+    var user = req.user;
 
     res.render('profile', {
-        user: user
+        user: user,
+        message: handleMessage(req)
     });
 });
 
-router.get('/search', function(req, res) {
+router.get('/search', isAuthenticated, function(req, res) {
     var tag = req.query.tag;
     res.send(tag);
 });
 
-router.get('/article/remove', function(req, res){
+router.get('/article/remove', isAuthenticated, function(req, res){
     var _id = req.query.id;
     res.send('Deleting article with id of ' + _id + ' from favorites of the user.');
 });
 
-router.post('/save', function(req, res){
+router.post('/save', isAuthenticated, function(req, res){
     res.send(req.body);
 });
 

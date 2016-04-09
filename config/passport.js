@@ -28,6 +28,8 @@ module.exports = function(passport) {
 	/* http://passportjs.org/docs */
 	/* http://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619 */
 
+/* Promise functions */
+
 function validate(req, username, password) {
 	return new Promise(function(resolve, reject){
 		if(password.length < 2 ) {
@@ -72,6 +74,7 @@ function findUser(req, username, password) {
 	});
 }
 
+/* END Promise functions */
 
 passport.use('signup', new LocalStrategy({
     passReqToCallback : true
@@ -97,6 +100,7 @@ passport.use('login', new LocalStrategy({
 	findUser(req,username, password)
 	.then(function(user){
 		console.log('user found login...');
+		req.user = user;
 		return done(null, user);
 	})
 	.catch(function(error){

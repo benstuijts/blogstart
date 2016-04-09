@@ -11,10 +11,10 @@ of
 
 * [x] User Model
 * [x] Passport.js
-* [ ] Register User http://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619
+* [x] Register User http://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619
 * [ ] implement mailgun http://blog.mailgun.com/how-to-send-transactional-emails-in-a-nodejs-app-using-the-mailgun-api/
-* [ ] Authenticate User
-* [ ] Login User http://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619
+* [x] Authenticate User
+* [x] Login User http://code.tutsplus.com/tutorials/authenticating-nodejs-applications-with-passport--cms-21619
 * [x] User profile Page
 * [ ] Like article
 * [ ] Save favorite article
