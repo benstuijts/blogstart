@@ -17,7 +17,47 @@
     <div class="row article-body">
             <% include _elements/share-square%>
             <%= article.body %>
+    </div>
+    <hr>
+    <h2>Comments</h2>
+    <div class="row">
+        <div class="col-sm-1 hidden-xs">
+            <% if(isAuthenticated) { %>
+            retrieve user avatar
+            <img class="img-responsive img-circle" src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png">
+            <% } else {  %>
+            <img class="img-responsive img-cirlce" src="https://www.accrinet.com/images/3030_orig.png">
+            <% } %>
         </div>
+        <div class="col-xs-12 col-sm-11">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Guest of username of fullname of user
+                </div>
+                <div class="panel-body">
+                    <form>
+                        <textarea class="form-control" rows="3"></textarea>
+                        <br>
+                        <button class="btn btn-default" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    Comments already placed
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    guest or username, fullname of user
+                </div>
+                <div class="panel-body">
+                    A great Comment!
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>
 
 

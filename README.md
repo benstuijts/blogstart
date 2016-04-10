@@ -21,4 +21,10 @@ of
 * [ ] Comment article
 * [ ] User Rights
 * [ ] TinyMCE implementation
+* 
+## Great info
+
+Responsive HTML Email with Node.js - Send Rich, Responsive HTML Emails Using Ink, Yeoman & Express
+https://youtu.be/FrB8mxdWR7o?list=PLoYCgNOIyGAApoDfJHjmMgGNlYenKg5jO
+
 

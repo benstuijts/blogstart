@@ -1,5 +1,13 @@
 const mongoose    = require('mongoose');
 
+var Comment = mongoose.Schema({
+    author_id: mongoose.Schema.Types.ObjectId,
+    body: String,
+    status: { type: Number, default: 0 },
+    like : Array
+    
+}, {timestamps: true});
+
 var articleSchema = mongoose.Schema({
     
     title: String,
@@ -12,6 +20,9 @@ var articleSchema = mongoose.Schema({
     backgroundColor: { type: String, default: "BurlyWood"},
     views: {type: Number, default: 0},
     published: {type: Boolean, default: false},
+    
+    comments  : [Comment],
+    
     settings: mongoose.Schema.Types.Mixed,
     _statics: mongoose.Schema.Types.Mixed
     
