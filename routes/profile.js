@@ -64,6 +64,19 @@ router.get('/article/remove', isAuthenticated, function(req, res){
     var _id = req.query.id;
     res.send('Deleting article with id of ' + _id + ' from favorites of the user.');
 });
+router.get('/article/dislike', function(req, res) {
+    var indexOfArticle = req.user.articles.liked.map(function(x) {return x.id; }).indexOf(req.query.id);
+    req.user.articles.liked.splice(indexOfArticle, 1);
+    req.user.save(function(error){
+        if(error) {
+            req.flash('error', 'There was an error: ' + error);
+        } else {
+            req.flash('success', 'Like was removed.');
+        }
+        res.redirect('./');
+    });
+    
+});
 
 router.post('/save', isAuthenticated, function(req, res){
     res.send(req.body);

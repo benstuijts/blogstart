@@ -37,15 +37,17 @@
             
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#articles" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-star"></i> Articles</a></li>
+                <li role="presentation"><a href="#articles_liked" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-thumbs-o-up"></i> Articles liked <span class="badge"><%= user.articles.liked.length%></span></a></li>
                 <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-cogs"></i> Edit profile</a></li>
-                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">DEV</a></li>
                 <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
             </ul>
             
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="articles"><% include profile/articles %></div>
+                <div role="tabpanel" class="tab-pane" id="articles_liked"><% include profile/articles_liked %></div>
                 <div role="tabpanel" class="tab-pane" id="profile"><% include profile/edit %></div>
-                <div role="tabpanel" class="tab-pane" id="messages">messages...</div>
+                <div role="tabpanel" class="tab-pane" id="messages"><pre><%- user %></pre></div>
                 <div role="tabpanel" class="tab-pane" id="settings">settings...</div>
             </div>
             

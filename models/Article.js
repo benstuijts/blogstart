@@ -7,6 +7,7 @@ var Comment = mongoose.Schema({
     like : Array
     
 }, {timestamps: true});
+Comment.statics = require('../modules/mongoose-statics');
 
 var articleSchema = mongoose.Schema({
     
@@ -17,6 +18,7 @@ var articleSchema = mongoose.Schema({
     author: String,
     image: String,
     body: String,
+    like: Array,
     backgroundColor: { type: String, default: "BurlyWood"},
     views: {type: Number, default: 0},
     published: {type: Boolean, default: false},

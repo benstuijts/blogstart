@@ -12,8 +12,8 @@ const express   = require("express");
 const app       = express();
 const init      = require("./config/init");
 const passport  = require('passport');
-var session = require('express-session');
-var flash = require('connect-flash');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 
 /* Configuration */

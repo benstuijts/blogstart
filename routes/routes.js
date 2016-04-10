@@ -1,3 +1,4 @@
+'use strict';
 const express = require("express");
 const router = express.Router();
 const bodyParser = require('body-parser');
@@ -56,7 +57,76 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/article/like', function(req, res) {
+    if(req.user) {
+        const article_id = req.query.article_id;
+        const cb = '/' + req.query.cb;
+        
+        req.user.articles.liked.push({
+            id: article_id,
+            title: req.query.title,
+            slug: req.query.cb
+        });
+        req.user.save(function(error){
+            if(error) {
+                
+            }
+            res.redirect(cb);
+        });
+    }
+});
 
+router.get('/comment/like', function(req, res){
+    console.log('like comment');
+    if(req.user) {
+        const article_id = req.query.article_id;
+        const comment_id = req.query.comment_id;
+        const cb = '/' + req.query.cb;
+        
+        console.log(cb);
+        
+        Article.findById(article_id, function(error, article){
+            console.log(article._id, article.title);
+            
+            let comment = article.comments.id(comment_id);
+            
+            console.log(comment);
+            
+            comment.like.push(req.user._id);
+            article.save(function(error){
+                if(error) {
+                    console.log(error);
+                }
+                res.redirect(cb);
+            })
+            
+        });
+        
+        
+    }
+});
+
+router.post('/comment', function(req, res){
+    const comment = {
+        author_id: req.user._id,
+        body: req.body.comment_body
+    };
+    if(req.user) {
+        Article._read({ _id: req.body.article_id})
+        .then(function(articles){
+            articles[0].comments.push(comment);
+            articles[0].save(function(error){
+                if(error) {
+                    req.flash('error', 'Error: ' + error);
+                } else {
+                    req.flash('success', 'Thanks for your comment!');
+                }
+            });
+        })
+        .catch()
+    }
+
+});
 
 
 

@@ -13,7 +13,15 @@
     </div>
 </div>
 
+
+
 <div class="container">
+    
+    <hr>
+    <i class="fa fa-thumbs-o-up"></i> <%= article.like.length %>
+    <a class="pull-right" href="./article/like?article_id=<%= article._id %>&title=<%= article.title%>&cb=<%= article.slug %>">I like this article!</a>
+    <hr>
+    
     <div class="row article-body">
             <% include _elements/share-square%>
             <%= article.body %>
@@ -35,8 +43,9 @@
                     Guest of username of fullname of user
                 </div>
                 <div class="panel-body">
-                    <form>
-                        <textarea class="form-control" rows="3"></textarea>
+                    <form method="post" action="/comment">
+                        <textarea name="comment_body" class="form-control" rows="3"></textarea>
+                        <input type="hidden" name="article_id" value="<%= article._id%>">
                         <br>
                         <button class="btn btn-default" type="submit">Submit</button>
                     </form>
@@ -46,15 +55,37 @@
     </div>
     Comments already placed
     <div class="row">
+        <pre>
+            <%= article.comments %>
+        </pre>
         <div class="col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    guest or username, fullname of user
+            
+            <% article.comments.forEach(function(comment, index) { %>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <%= comment.author_id %>
+                        <span class="pull-right text-muted">
+                            <%= comment.createdAt %>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <%= comment.body %>
+                        
+                    </div>
+                    <div class="panel-footer">
+                        <i class="fa fa-thumbs-o-up"></i> <%= comment.like.length %>
+                        <a href="./comment/like?article_id=<%= article._id %>&comment_id=<%= comment._id %>&cb=<%= article.slug %>" class="pull-right">
+                            like <i class="fa fa-thumbs-o-up"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    A great Comment!
-                </div>
-            </div>
+            <% }) %>
+            
+            
+            
+            
+            
+            
         </div>
     </div>
     

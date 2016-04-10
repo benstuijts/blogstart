@@ -63,7 +63,6 @@ function findOrCreateUser(req, username, password) {
 function findUser(req, username, password) {
 	return new Promise(function(resolve, reject){
 		User.findOne({'local.username': username}, function(error, user){
-			console.log('finding ' + username + ' in database ' + error + user);
 			if(error) { reject('Error: ' + error); }
 			if(!user) { reject('No ' + username + ' found.'); }
 			if(!user.validPassword(password)) { reject('Invalid Password'); 
@@ -99,7 +98,6 @@ passport.use('login', new LocalStrategy({
   }, function(req, username, password, done) {
 	findUser(req,username, password)
 	.then(function(user){
-		console.log('user found login...');
 		req.user = user;
 		return done(null, user);
 	})
