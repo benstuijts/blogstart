@@ -34,7 +34,8 @@ router.use(function(req, res, next) {
 
     res.locals.add({
         url: u,
-        isAuthenticated: req.isAuthenticated()
+        isAuthenticated: req.isAuthenticated(),
+        theme: false,
     });
 
     next();
@@ -147,7 +148,8 @@ const themes = {
     "spacelab" : "http://bootswatch.com/spacelab/bootstrap.min.css ", 
     "superhero" : "http://bootswatch.com/superhero/bootstrap.min.css ", 
     "united" : "http://bootswatch.com/united/bootstrap.min.css ", 
-    "yeti" : "http://bootswatch.com/yeti/bootstrap.min.css "
+    "yeti" : "http://bootswatch.com/yeti/bootstrap.min.css",
+    "creative" : "http://blackrockdigital.github.io/startbootstrap-creative/css/creative.css",
     
 };
 
@@ -158,7 +160,7 @@ router.get('*', function(req, res) {
     
     
     
-    const theme = themes[req.query.theme] || null;
+    const theme = themes[req.query.theme] || false;
     const url = req.url.split("?")[0].substr(1);
     
     Article._read({

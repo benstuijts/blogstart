@@ -36,7 +36,7 @@ function handleMessage(req) {
 	router.get('/allusers', function(req, res) {
 		User.find({}, function(err, users){
 			if(err) throw err;
-			res.send('<pre>' + users + '</pre>');
+			res.send('<h1>Users ('+users.length+')</h1><pre>' + users + '</pre>');
 		});
 	});
 	router.get('/delusers', function(req, res) {
