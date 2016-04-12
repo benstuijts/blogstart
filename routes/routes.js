@@ -57,6 +57,8 @@ router.get('/', function(req, res) {
     });
 });
 
+
+
 router.get('/article/like', function(req, res) {
     if(req.user) {
         const article_id = req.query.article_id;
@@ -129,10 +131,38 @@ router.post('/comment', function(req, res){
 });
 
 
+const themes = {
+    "cosmo" : "http://bootswatch.com/cosmo/bootstrap.min.css",
+    "cerulean" : "http://bootswatch.com/cerulean/bootstrap.min.css",
+    "cyborg" : "http://bootswatch.com/cyborg/bootstrap.min.css ", 
+    "darkly" : "http://bootswatch.com/darkly/bootstrap.min.css ", 
+    "flatly" : "http://bootswatch.com/flatly/bootstrap.min.css ", 
+    "journal" : "http://bootswatch.com/journal/bootstrap.min.css ", 
+    "lumen" : "http://bootswatch.com/lumen/bootstrap.min.css ", 
+    "paper" : "http://bootswatch.com/paper/bootstrap.min.css ", 
+    "readable" : "http://bootswatch.com/readable/bootstrap.min.css ",
+    "sandstone" : "http://bootswatch.com/sandstone/bootstrap.min.css ", 
+    "simplex" : "http://bootswatch.com/simplex/bootstrap.min.css ", 
+    "slate" : "http://bootswatch.com/slate/bootstrap.min.css ", 
+    "spacelab" : "http://bootswatch.com/spacelab/bootstrap.min.css ", 
+    "superhero" : "http://bootswatch.com/superhero/bootstrap.min.css ", 
+    "united" : "http://bootswatch.com/united/bootstrap.min.css ", 
+    "yeti" : "http://bootswatch.com/yeti/bootstrap.min.css "
+    
+};
+
+
+
 
 router.get('*', function(req, res) {
+    
+    
+    
+    const theme = themes[req.query.theme] || null;
+    const url = req.url.split("?")[0].substr(1);
+    
     Article._read({
-            slug: req.url.substr(1)
+            slug: url
         })
         .then(function(article) {
             if (article.length == 0) {
@@ -143,6 +173,7 @@ router.get('*', function(req, res) {
                     navigation: require('../config/navigation'),
                     message: req.flash('message'),
                     article: article[0],
+                    theme: theme
                 });
             }
         })
