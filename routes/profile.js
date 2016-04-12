@@ -64,6 +64,33 @@ router.get('/article/remove', isAuthenticated, function(req, res){
     var _id = req.query.id;
     res.send('Deleting article with id of ' + _id + ' from favorites of the user.');
 });
+
+router.get('/article/save', function(req, res) {
+    //var indexOfArticle = req.user.articles.favorite.map(function(x) {return x.id; }).indexOf(req.query.id);
+    //req.user.articles.favorite.splice(indexOfArticle, 1);
+        if(req.user) {
+        const article_id = req.query.article_id;
+        const cb = '/' + req.query.cb;
+        
+        req.user.articles.favorite.push({
+            id: article_id,
+            title: req.query.title,
+            slug: req.query.cb
+        });
+        req.user.save(function(error){
+            if(error) {
+                req.flash('error','Error: ' + error);
+            } else {
+                req.flash('success','Article was saved.');
+            }
+            
+            res.redirect(cb);
+        });
+    }
+    
+});
+
+
 router.get('/article/dislike', function(req, res) {
     var indexOfArticle = req.user.articles.liked.map(function(x) {return x.id; }).indexOf(req.query.id);
     req.user.articles.liked.splice(indexOfArticle, 1);
