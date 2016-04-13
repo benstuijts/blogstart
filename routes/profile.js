@@ -1,3 +1,4 @@
+'use strict';
 const express = require("express");
 const router = express.Router();
 const bodyParser = require('body-parser');
@@ -46,18 +47,50 @@ var isAuthenticated = function (req, res, next) {
 }
 
 router.get('/', isAuthenticated, function(req, res) {
+    let user = req.user;
     
-    var user = req.user;
-
-    res.render('profile', {
-        user: user,
-        message: handleMessage(req)
+    Article.find({}).limit(5).sort('-createdAt').exec(function(error, newestArticles) {
+        if(error) {
+            req.flash('error', 'Error: ' + error);
+        }
+        res.render('profile', {
+            user: user,
+            message: handleMessage(req),
+            newestArticles: newestArticles
+        });
     });
+    
+    
 });
 
 router.get('/search', isAuthenticated, function(req, res) {
     var tag = req.query.tag;
     res.send(tag);
+});
+
+router.get('/article/like', function(req, res) {
+    let cb = '/' + req.query.cb;
+    if(req.user) {
+        Article._readOne({_id: req.query.article_id})
+        .then(function(article){
+            if(article.like.indexOf(req.user._id) == -1) {
+                article.like.push(req.user._id);
+                article.save(function(error){
+                    if(error) {
+                        req.flash('error', 'Error: ' + error );
+                    } else {
+                        req.flash('success', 'Thank you!');
+                    }
+                    res.redirect(cb);
+                });
+            } else {
+                req.flash('info', 'You already liked this article, thank you.');
+                res.redirect(cb);
+            }
+            
+        })
+        .catch();
+    }
 });
 
 router.get('/article/remove', isAuthenticated, function(req, res){
@@ -66,8 +99,7 @@ router.get('/article/remove', isAuthenticated, function(req, res){
 });
 
 router.get('/article/save', function(req, res) {
-    //var indexOfArticle = req.user.articles.favorite.map(function(x) {return x.id; }).indexOf(req.query.id);
-    //req.user.articles.favorite.splice(indexOfArticle, 1);
+
         if(req.user) {
         const article_id = req.query.article_id;
         const cb = '/' + req.query.cb;

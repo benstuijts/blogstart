@@ -1,0 +1,22 @@
+<% if(isAuthenticated) { %>
+
+    <hr>
+    <i class="fa fa-thumbs-o-up"></i> <%= article.like.length %>
+    
+    <a class="" href="./profile/article/like?article_id=<%= article._id %>&title=<%= article.title%>&cb=<%= article.slug %>">
+        I like this article!
+    </a>
+    
+    <a class="btn btn-default pull-right" href="./profile/article/save?article_id=<%= article._id %>&title=<%= article.title%>&cb=<%= article.slug %>">
+        <i class="fa fa-heart"></i> <span class="hidden-xs">Save this article</span>
+    </a>
+
+<% } else { %>
+
+    <hr>
+    <a href="./auth/signup">sign up <strong>here</strong> for your personal account...</a>
+
+<% } %>
+
+
+

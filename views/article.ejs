@@ -16,21 +16,9 @@
 
 
 <div class="container">
-    
-    <hr>
-    <i class="fa fa-thumbs-o-up"></i> <%= article.like.length %>
-    
-    <% if(isAuthenticated) {%>
-        <a class="btn btn-default pull-right" href="./profile/article/save?article_id=<%= article._id %>&title=<%= article.title%>&cb=<%= article.slug %>">
-            <i class="fa fa-heart"></i> Save as favorite
-        </a>
-    <% } %>
-    
-    <a class="btn btn-default pull-right" href="./article/like?article_id=<%= article._id %>&title=<%= article.title%>&cb=<%= article.slug %>">
-        <i class="fa fa-thumbs-o-up"></i> I like this article!
-    </a>
-    <hr>
-    
+    <% include ./_elements/breadcrumbs %>
+    <% include ./_elements/user-social-bar %>
+    <% include ./_elements/message-bar %>
     <div class="row article-body">
             <% include _elements/share-square%>
             <%= article.body %>

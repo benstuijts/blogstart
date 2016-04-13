@@ -36,6 +36,7 @@ router.use(function(req, res, next) {
         url: u,
         isAuthenticated: req.isAuthenticated(),
         theme: false,
+        breadcrumbs: null
     });
 
     next();
@@ -60,24 +61,7 @@ router.get('/', function(req, res) {
 
 
 
-router.get('/article/like', function(req, res) {
-    if(req.user) {
-        const article_id = req.query.article_id;
-        const cb = '/' + req.query.cb;
-        
-        req.user.articles.liked.push({
-            id: article_id,
-            title: req.query.title,
-            slug: req.query.cb
-        });
-        req.user.save(function(error){
-            if(error) {
-                
-            }
-            res.redirect(cb);
-        });
-    }
-});
+
 
 router.get('/comment/like', function(req, res){
     console.log('like comment');
@@ -173,7 +157,7 @@ router.get('*', function(req, res) {
             else {
                 res.render('article', {
                     navigation: require('../config/navigation'),
-                    message: req.flash('message'),
+                    message: handleMessage(req),
                     article: article[0],
                     theme: theme
                 });

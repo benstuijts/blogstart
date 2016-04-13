@@ -17,15 +17,21 @@
 
 
 <ol class="breadcrumb">
+    
+    
+    <% if(breadcrumbs) { %>
+    
     <% breadcrumbs.forEach(function(crumb) { %>
         <li><a href="<%= crumb.url %>"><%= crumb.name%></a></li>
     <% }); %>
+    
+    <% } %>
     
     <% if (article) { %>
         <a  class="pull-right"
             href="mailto:
               ?subject=<%= article.title %>?
-              &body=Ik kwam dit interessante artikel tegen op <%= baseUrl %>%0A%0A<%= article.title %>%0A<%= article.subtitle %>%0A<%= snippit %>%0ALees verder op <%= baseUrl %><% article.slug %><%= article.slug %>.
+              &body=Ik kwam dit interessante artikel tegen op <%= baseUrl %>%0A%0A<%= article.title %>%0A<%= article.subtitle %>Lees verder op <%= baseUrl %><% article.slug %><%= article.slug %>.
               " 
             title="mail dit artikel naar iemand"
         >

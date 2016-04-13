@@ -18,20 +18,7 @@ function handleMessage(req) {
         "message"   : req.flash("message")
     };
 }
-    
-	//localhost:8080/auth/
-	router.get('/', function(req, res){
-		res.render('index.ejs');
-	});
-	
-	//localhost:8080/auth/login
-	//router.get('/login', function(req, res){
-//		res.render('/', { message: req.flash('message') });/
-//	});
-	
 
-
-	
 	/* Development Only */
 	router.get('/allusers', function(req, res) {
 		User.find({}, function(err, users){
@@ -103,9 +90,6 @@ function handleMessage(req) {
 		res.render('auth/terms');
 	});
 
-	//router.get('/profile', isLoggedIn, function(req, res){
-	// 	res.render('profile.ejs', { user: req.user });
-	//});
 	
 	router.get('/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
