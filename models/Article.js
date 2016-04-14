@@ -35,6 +35,8 @@ var articleSchema = mongoose.Schema({
 
 articleSchema.statics = require('../modules/mongoose-statics');
 
+
+
 articleSchema.statics.getDescription = function(body) {
     var response = body.replace(/<(?:.|\n)*?>/gm, '');
     return response.substr(0,150);  
