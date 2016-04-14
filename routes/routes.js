@@ -31,12 +31,11 @@ router.use(function(req, res, next) {
         host: req.get('host'),
         pathname: req.originalUrl
     });
-
+    
     res.locals.add({
         url: u,
         isAuthenticated: req.isAuthenticated(),
-        theme: false,
-        breadcrumbs: null
+        breadcrumbs: null,
     });
 
     next();
@@ -98,6 +97,7 @@ router.post('/comment', function(req, res){
         author_id: req.user._id,
         body: req.body.comment_body
     };
+    let cb = '/' + req.body.cb;
     if(req.user) {
         Article._read({ _id: req.body.article_id})
         .then(function(articles){
@@ -108,6 +108,7 @@ router.post('/comment', function(req, res){
                 } else {
                     req.flash('success', 'Thanks for your comment!');
                 }
+                res.redirect(cb);
             });
         })
         .catch()
@@ -133,8 +134,7 @@ const themes = {
     "superhero" : "http://bootswatch.com/superhero/bootstrap.min.css ", 
     "united" : "http://bootswatch.com/united/bootstrap.min.css ", 
     "yeti" : "http://bootswatch.com/yeti/bootstrap.min.css",
-    "creative" : "http://blackrockdigital.github.io/startbootstrap-creative/css/creative.css",
-    
+    "creative" : "http://blackrockdigital.github.io/startbootstrap-creative/css/creative.css"
 };
 
 
@@ -142,24 +142,21 @@ const themes = {
 
 router.get('*', function(req, res) {
     
-    
-    
-    const theme = themes[req.query.theme] || false;
     const url = req.url.split("?")[0].substr(1);
-    
-    Article._read({
+
+    Article._readOne({
             slug: url
         })
         .then(function(article) {
-            if (article.length == 0) {
-                res.send('not found');
+            if (!article) {
+                req.flash('warning', 'Article not found');
+                res.redirect('/');
             }
             else {
                 res.render('article', {
                     navigation: require('../config/navigation'),
                     message: handleMessage(req),
-                    article: article[0],
-                    theme: theme
+                    article: article,
                 });
             }
         })

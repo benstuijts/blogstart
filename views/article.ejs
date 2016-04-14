@@ -43,6 +43,7 @@
                     <form method="post" action="/comment">
                         <textarea name="comment_body" class="form-control" rows="3"></textarea>
                         <input type="hidden" name="article_id" value="<%= article._id%>">
+                        <input type="hidden" name="cb" value="<%= article.slug %>">
                         <br>
                         <button class="btn btn-default" type="submit">Submit</button>
                     </form>

@@ -14,7 +14,7 @@ const init      = require("./config/init");
 const passport  = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
-
+const themes = require('./config/themes');
 
 /* Configuration */
 app.use(session({secret: 'anystringoftext',
@@ -42,6 +42,7 @@ const configuration = function(req,res, next) {
     }
   };
   res.locals['navigation'] = navigation,
+  res.locals['theme'] = (config['mode'] == 'development') ? themes[req.query.theme] : null;
   next();
 };
 
