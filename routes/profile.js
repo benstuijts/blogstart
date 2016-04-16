@@ -34,7 +34,7 @@ router.use(function(req, res, next) {
 
     res.locals.add({
         url: u,
-        isAuthenticated:  req.isAuthenticated()
+        isAuthenticated: req.isAuthenticated()
     });
 
     next();
