@@ -9,11 +9,13 @@ of
 
 ## Things to do
 
-* [ ] login page
+* [x] login page
+* [x] 404 page
+* [ ] Homepage statistics field
 * [ ] improved session
-* [ ] articles page: gridview add href
-* [ ] articles page: gridview improved styling likes and views
-* [ ] article.ejs: body text inclusive styling
+* [x] articles page: gridview add href
+* [x] articles page: gridview improved styling likes and views
+* [x] article.ejs: body text inclusive styling
 * [ ] comments: show user's name when logged in or show "guest"
 * [ ] profile page: edit your profile
 * [ ] profile page: route delete article from favorites

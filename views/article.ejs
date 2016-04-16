@@ -6,14 +6,13 @@
     
     <div class="container">
         <div class="row">
-            <h1><%= article.title %></h1>
-            <h3><%= article.author %></h3>
-            <img src="<%= article.image %>">
+            <h1 style="color: <%=article.titleColor%>"><%= article.title %></h1>
+            <h3 style="color: <%=article.titleColor%>"><%= article.author %></h3>
+            <p class="text-muted"><%=article.author%> | <%=article.createdAt%></p>
+            <img class="article-main-image" src="<%= article.image %>">
         </div>
     </div>
 </div>
-
-
 
 <div class="container">
     <% include ./_elements/breadcrumbs %>
@@ -21,7 +20,7 @@
     <% include ./_elements/message-bar %>
     <div class="row article-body">
             <% include _elements/share-square%>
-            <%= article.body %>
+            <%- article.body %>
     </div>
     <hr>
     <h2>Comments</h2>
@@ -97,6 +96,10 @@
 .article-header {
     text-align: center;
     padding: 50px;
+}
+.article-main-image {
+    max-width: 90%;
+    
 }
 .article-body {
     margin-top: 50px;

@@ -204,6 +204,7 @@ router.get('/dashboard', isLoggedIn, function(req, res){
                         title: article.title,
                         subtitle: article.subtitle,
                         backgroundColor: article.backgroundColor,
+                        titleColor: article.titleColor,
                         slug: article.slug,
                         tags: article.tags,
                         author: article.author,
@@ -272,6 +273,7 @@ router.post('/dashboard', isLoggedIn, checkToken, function(req,res){
     if(req.body.action === 'CREATE_ARTICLE') {
         var title = req.body.title, subtitle = req.body.subtitle, slug = req.body.slug,
             backgroundColor = req.body.backGroundColor,
+            titleColor = req.body.titleColor,
             tags = req.body.tags, author = req.body.author || config.author, 
             image = req.body.image, body = req.body.body;
             
@@ -289,6 +291,7 @@ router.post('/dashboard', isLoggedIn, checkToken, function(req,res){
             article.title = title;
             article.subtitle = subtitle;
             article.backgroundColor = backgroundColor;
+            article.titleColor = titleColor,
             article.slug = slug;
             article.tags = tags;
             article.author = author;
@@ -314,6 +317,7 @@ router.post('/dashboard', isLoggedIn, checkToken, function(req,res){
             title: req.body.title,
             subtitle: req.body.subtitle,
             backgroundColor: req.body.backgroundColor,
+            titleColor: req.body.titleColor,
             slug: req.body.slug,
             tags: req.body.tags,
             author: req.body.author,

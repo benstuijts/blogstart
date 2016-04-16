@@ -36,9 +36,7 @@ app.use(express.static('public'));
 /* Middleware */
 const configuration = function(req,res, next) {
   
-  if(req.query) {
-    console.log('query string found: ' + req.query.theme);
-  }
+  
 
   res.locals = require("./config/init")[config['mode']];
   res.locals['add'] = function(obj) {
@@ -48,7 +46,7 @@ const configuration = function(req,res, next) {
   };
   res.locals['navigation'] = navigation,
   res.locals['theme'] = false;
-  res.locals['theme'] = (config['mode'] == 'development') ? themes[req.query.theme] : null;
+  //res.locals['theme'] = (config['mode'] == 'development') ? themes[req.query.theme] : "yeti";
   next();
 };
 

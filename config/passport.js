@@ -34,6 +34,7 @@ function validate(req, username, password) {
 	return new Promise(function(resolve, reject){
 		if(password.length < 2 ) {
 			reject('Password length minimum of 8 characters.');
+			return;
 		}
 		resolve();
 	});
@@ -43,8 +44,8 @@ function findOrCreateUser(req, username, password) {
 	return new Promise(function(resolve, reject){
 		User.findOne({ 'local.username': username},
 		function(error, user){
-			if(error) { reject('Error: ' + error); }
-			if(user) { reject('This user already exists');
+			if(error) { reject('Error: ' + error); return;}
+			if(user) { reject('This user already exists'); return;
 				
 			} else {
 			var newUser = new User();
@@ -52,7 +53,7 @@ function findOrCreateUser(req, username, password) {
           		newUser.local.password 	= newUser.generateHash(password);
           		newUser.local.email 	= req.body.email;
           		newUser.save(function(error){
-          			if(error) { reject('Database Error!');}
+          			if(error) { reject('Database Error!');return;}
           			resolve(newUser);
           		});
 			}
@@ -64,11 +65,8 @@ function findUser(req, username, password) {
 	return new Promise(function(resolve, reject){
 		User.findOne({'local.username': username}, function(error, user){
 			
-			console.log(user);
-			
-			
-			if(error) { reject('Error: ' + error); }
-			if(!user) { reject('No ' + username + ' found.'); }
+			if(error) { reject('Error: ' + error); return; }
+			if(!user) { reject('No ' + username + ' found.'); return; }
 			if(!user.validPassword(password)) { reject('Invalid Password'); 
 			} else {
 				resolve(user);

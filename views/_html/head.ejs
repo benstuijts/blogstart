@@ -16,9 +16,10 @@
     <% } %>
     
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,400italic,700" rel="stylesheet" type="text/css"/>
-    <% if(theme) { %>
-      <link href="<%= theme %>" rel="stylesheet" type="text/css"/>
-    <% } %>
     <link rel="stylesheet" href="./css/blogstart.css">
+    <% if(theme!='') { %>
+      <link rel="stylesheet" href="<%= theme %>"  type="text/css"/>
+    <% } %>
+    
   </head>
   <body>

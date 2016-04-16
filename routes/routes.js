@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const url = require('url');
 const Article = require('../models/Article');
 const User = require('../models/User');
+const themes = require('../config/themes');
 
 /* Middleware */
 router.use(bodyParser.json()); // to support JSON-encoded bodies
@@ -31,7 +32,7 @@ router.use(function(req, res, next) {
         host: req.get('host'),
         pathname: req.originalUrl
     });
-    
+
     res.locals.add({
         url: u,
         isAuthenticated: req.isAuthenticated(),
@@ -52,8 +53,6 @@ router.get('/layout/:number', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    
-
     res.render('landingspage', {
         navigation: require('../config/navigation'),
         message: handleMessage(req),
@@ -135,18 +134,24 @@ router.get('/articles', function(req, res){
     
 });
 
+router.get('/login', function(req, res){
+    res.render('login', {
+        message: handleMessage(req)
+    });
+});
 
 router.get('*', function(req, res) {
     
     const url = req.url.split("?")[0].substr(1);
-
+    const theme = themes[req.query.theme] || '';
     Article._readOne({
             slug: url
         })
         .then(function(article) {
             if (!article) {
-                req.flash('warning', 'Article not found');
-                res.redirect('/');
+                res.render('404', {
+                    
+                });
             }
             else {
                 
@@ -159,6 +164,7 @@ router.get('*', function(req, res) {
                         navigation: require('../config/navigation'),
                         message: handleMessage(req),
                         article: article,
+                        theme: theme,
                     });
                 });
             }

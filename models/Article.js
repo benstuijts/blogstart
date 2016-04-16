@@ -19,7 +19,8 @@ var articleSchema = mongoose.Schema({
     image: String,
     body: String,
     like: Array,
-    backgroundColor: { type: String, default: "BurlyWood"},
+    backgroundColor: { type: String},
+    titleColor: String,
     views: {type: Number, default: 0},
     published: {type: Boolean, default: false},
     

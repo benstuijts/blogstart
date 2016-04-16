@@ -9,6 +9,15 @@ module.exports = function(router, passport){
 	    extended: true
 	}));
 
+	router.use(function(req, res, next) {
+    res.locals.add({
+        isAuthenticated: req.isAuthenticated(),
+        breadcrumbs: null,
+    });
+
+    next();
+});
+
 function handleMessage(req) {
     return {
         "success"   : req.flash("success"),
@@ -50,7 +59,7 @@ function handleMessage(req) {
 	}));
 	
 	router.post('/signup', passport.authenticate('signup', {
-    	successRedirect: '/',
+    	successRedirect: '/profile',
     	failureRedirect: './signup',
     	failureFlash : true 
   	}));

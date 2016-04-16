@@ -1,0 +1,51 @@
+<% include ./_html/head %>
+
+<% include ./_elements/navigation-top-bar %>
+<div class="container">
+        <div class="row">
+            <h1>Welcome, please login to your personal account.</h1>
+            <br>
+        <div class="col-sm-6 col-md-5">
+            <form method="post" action="./auth/login">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="Type your username here">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Type your password here">
+                </div>
+                <small>
+                    By clicking on "Login" below, you are agreeing to the <a href="./terms-of-service" target="_blank">Terms of Service</a> and the <a href="./privacy-policy" target="_blank">Privacy Policy</a>.
+                </small>
+                <br><br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-lg">Login</button>
+                </div>
+                <a href="auth/signup">Or sign up...</a>
+            </form>
+            
+            <% include ./_elements/message-bar %>
+            
+        </div>
+        
+        <div class="col-sm-6 col-md-4 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Additional information</h3>
+                </div>
+                <div class="panel-body">
+                    Aenean fermentum tempus ipsum, id ornare turpis blandit in. Nullam varius pellentesque sem, non luctus leo aliquam id. In finibus ac justo et commodo. Aliquam erat volutpat. Cras vitae metus in purus volutpat sagittis sit amet ut ex. Donec mattis tempus risus scelerisque molestie. Nulla facilisi.
+                </div>
+                
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="fa fa-check text-success"></i> Easy to use</li>
+                    <li class="list-group-item"><i class="fa fa-check text-success"></i> Always up to date</li>
+                    <li class="list-group-item"><i class="fa fa-check text-success"></i> Great feature</li>
+                </ul>
+            </div>
+        </div>
+        
+</div>
+
+<% include ./_html/scripts %>
