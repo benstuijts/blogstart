@@ -56,6 +56,7 @@ app.use('/auth', configuration,auth);
 
 app.use('/admin', configuration, require('./routes/admin'));
 app.use('/profile', configuration, require('./routes/profile'));
+app.use('/forum', configuration, require('./routes/forum'));
 app.use('/'     , configuration, require('./routes/routes'));
 
 app.listen(8080, function () {

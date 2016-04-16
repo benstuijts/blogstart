@@ -6,5 +6,9 @@ module.exports  = [
     {
         title: "articles",
         href: "/articles"
+    },
+    {
+        title: "forum",
+        href: "/forum"
     }
 ];

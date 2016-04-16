@@ -1,0 +1,167 @@
+<% include ./_html/head %>
+
+<% include ./_elements/navigation-top-bar %>
+<div class="container">
+    
+    
+    <h1><%= name%> Forum</h1>
+    <hr>
+    
+    <br><br>
+    <h2 class="text-uppercase">Recent topics</h2>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="forum-box category-1">
+                <h3>Title of topic</h3>
+                <h4>Categorie Name</h4>
+                <div class="category-icon">
+                    <i class="fa fa-snapchat-ghost" aria-hidden="true"></i>
+                </div>
+                <div class="category-reactions">
+                    23
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-3">
+            <div class="forum-box category-2">
+                <h3>Title of topic</h3>
+                <h4>Categorie Name</h4>
+                <div class="category-icon">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                </div>
+                <div class="category-reactions">
+                    11
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-3">
+            <div class="forum-box category-3">
+                <h3>Title of topic</h3>
+                <h4>Categorie Name</h4>
+                <div class="category-icon">
+                    <i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i>
+                </div>
+                <div class="category-reactions">
+                    5
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-3">
+            <div class="forum-box category-4">
+                <h3>Title of topic</h3>
+                <h4>Categorie Name</h4>
+                <div class="category-icon">
+                    <i class="fa fa-comments" aria-hidden="true"></i>
+                </div>
+                <div class="category-reactions">
+                    123
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <br><br>
+    <h2 class="text-uppercase">Categories</h2>
+    
+    <div class="row">
+        
+        <div class="col-xs-2 category-3 category-icon-wrapper">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        </div>
+        
+        <div class="col-xs-6">
+            <h2>Title of Category</h2>
+            <h4 class="text-muted">Short Description of Category</h4>
+        </div>
+        
+        <div class="col-sm-1 text-center hidden-xs">
+            <h2>40</h2>
+            <h4 class="text-uppercase">topics</h4>
+        </div>
+        
+        <div class="col-sm-1 text-center hidden-xs">
+            <h2>379</h2>
+            <h4 class="text-uppercase">posts</h4>
+        </div>
+        
+    </div>
+    
+    <div class="row">
+        
+        <div class="col-xs-2 category-1 category-icon-wrapper">
+            <i class="fa fa-snapchat-ghost" aria-hidden="true"></i>
+        </div>
+        
+        <div class="col-xs-6">
+            <h2>Title of Category</h2>
+            <h4 class="text-muted">Short Description of Category</h4>
+        </div>
+        
+        <div class="col-sm-1 text-center hidden-xs">
+            <h2>12</h2>
+            <h4 class="text-uppercase">topics</h4>
+        </div>
+        
+        <div class="col-sm-1 text-center hidden-xs">
+            <h2>8945</h2>
+            <h4 class="text-uppercase">posts</h4>
+        </div>
+        
+    </div>
+    
+</div>
+<% include ./_html/scripts %>
+
+<style>
+    .forum-box {
+        position: relative;
+        min-height: 160px;
+        padding: 2px 10px;
+        margin: 3px;
+    }
+    .category-icon {
+        position: absolute;
+        bottom: 5px; left: 10px;
+        font-size: 2.5em;
+    }
+    .category-icon-wrapper {
+        margin: 10px;
+        border-radius: 100%;
+        width: 5%;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .category-icon-wrapper:after {
+        content:"";
+        display: block;
+        padding-top: 100%;
+    }
+    .category-icon-wrapper i {
+        //font-size: 3em;
+    }
+    .category-reactions {
+        position: absolute;
+        bottom: 5px; right: 10px;
+        font-size: 0.8em;
+    }
+    .category-1 {
+        background-color: darkgreen;
+        color: white;
+    }
+    .category-2 {
+        background-color: purple;
+        color: white;
+    }
+    .category-3 {
+        background-color: lightblue;
+        color: white;
+    }
+    .category-4 {
+        background-color: black;
+        color: white;
+    }
+</style>
