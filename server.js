@@ -10,7 +10,6 @@ process.argv.slice(2).forEach(function(value) {
 const http      = require("http");
 const express   = require("express");
 const app       = express();
-const init      = require("./config/init");
 const passport  = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -28,6 +27,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 
+
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
@@ -35,6 +35,11 @@ app.use(express.static('public'));
 
 /* Middleware */
 const configuration = function(req,res, next) {
+  
+  if(req.query) {
+    console.log('query string found: ' + req.query.theme);
+  }
+
   res.locals = require("./config/init")[config['mode']];
   res.locals['add'] = function(obj) {
     for(var key in obj) {
@@ -42,6 +47,7 @@ const configuration = function(req,res, next) {
     }
   };
   res.locals['navigation'] = navigation,
+  res.locals['theme'] = false;
   res.locals['theme'] = (config['mode'] == 'development') ? themes[req.query.theme] : null;
   next();
 };

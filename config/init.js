@@ -20,7 +20,7 @@ module.exports = {
             bic: ""
          },
         database: {
-            url: "mongodb://188.166.89.80/blogstart"
+            url: "mongodb://   /blogstart" 
         },
         email: {
             service: 'mailgun',

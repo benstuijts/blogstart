@@ -34,7 +34,7 @@ router.use(function(req, res, next) {
     
     res.locals.add({
         url: u,
-        isAuthenticated: req.isAuthenticated(),
+        isAuthenticated: false,//req.isAuthenticated(),
         breadcrumbs: null,
     });
 
@@ -52,10 +52,13 @@ router.get('/layout/:number', function(req, res) {
 });
 
 router.get('/', function(req, res) {
+    
+
     res.render('landingspage', {
         navigation: require('../config/navigation'),
         message: handleMessage(req),
     });
+    
 });
 
 

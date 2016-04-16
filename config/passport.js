@@ -63,6 +63,10 @@ function findOrCreateUser(req, username, password) {
 function findUser(req, username, password) {
 	return new Promise(function(resolve, reject){
 		User.findOne({'local.username': username}, function(error, user){
+			
+			console.log(user);
+			
+			
 			if(error) { reject('Error: ' + error); }
 			if(!user) { reject('No ' + username + ' found.'); }
 			if(!user.validPassword(password)) { reject('Invalid Password'); 
@@ -92,6 +96,7 @@ passport.use('signup', new LocalStrategy({
     	});
   })
 );
+
 
 passport.use('login', new LocalStrategy({
     passReqToCallback : true
