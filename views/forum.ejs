@@ -68,16 +68,16 @@
     <h2 class="text-uppercase">Categories</h2>
     
     <div class="row">
-        
-        <div class="col-xs-2 category-3 category-icon-wrapper">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        <div class="col-xs-1">
+             <span class="fa-stack fa-3x">
+                <i class="fa fa-circle fa-stack-2x category-3-color"></i>
+                <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+            </span>           
         </div>
-        
         <div class="col-xs-6">
             <h2>Title of Category</h2>
             <h4 class="text-muted">Short Description of Category</h4>
         </div>
-        
         <div class="col-sm-1 text-center hidden-xs">
             <h2>40</h2>
             <h4 class="text-uppercase">topics</h4>
@@ -87,30 +87,28 @@
             <h2>379</h2>
             <h4 class="text-uppercase">posts</h4>
         </div>
-        
     </div>
     
     <div class="row">
-        
-        <div class="col-xs-2 category-1 category-icon-wrapper">
-            <i class="fa fa-snapchat-ghost" aria-hidden="true"></i>
+        <div class="col-xs-1">
+             <span class="fa-stack fa-3x">
+                <i class="fa fa-circle fa-stack-2x category-1-color"></i>
+                <i class="fa fa-snapchat-ghost fa-stack-1x fa-inverse"></i>
+            </span>           
         </div>
-        
         <div class="col-xs-6">
             <h2>Title of Category</h2>
             <h4 class="text-muted">Short Description of Category</h4>
         </div>
-        
         <div class="col-sm-1 text-center hidden-xs">
-            <h2>12</h2>
+            <h2>40</h2>
             <h4 class="text-uppercase">topics</h4>
         </div>
         
         <div class="col-sm-1 text-center hidden-xs">
-            <h2>8945</h2>
+            <h2>379</h2>
             <h4 class="text-uppercase">posts</h4>
         </div>
-        
     </div>
     
 </div>
@@ -129,19 +127,22 @@
         font-size: 2.5em;
     }
     .category-icon-wrapper {
-        margin: 10px;
-        border-radius: 100%;
-        width: 5%;
+        position: relative;
+        width:5%;padding-bottom:5%;
         text-align: center;
-        vertical-align: middle;
     }
+    /*
     .category-icon-wrapper:after {
         content:"";
         display: block;
         padding-top: 100%;
     }
+    */
     .category-icon-wrapper i {
-        //font-size: 3em;
+        position: absolute;
+       
+       
+        font-size: 3em;
     }
     .category-reactions {
         position: absolute;
@@ -152,6 +153,7 @@
         background-color: darkgreen;
         color: white;
     }
+    .category-1-color { color: darkgreen; }
     .category-2 {
         background-color: purple;
         color: white;
@@ -160,8 +162,12 @@
         background-color: lightblue;
         color: white;
     }
+    .category-3-color {
+        color: lightblue;
+    }
     .category-4 {
         background-color: black;
         color: white;
     }
+    
 </style>

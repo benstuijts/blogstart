@@ -142,6 +142,12 @@ router.get('/login', function(req, res){
 
 router.get('*', function(req, res) {
     
+    if(req.isAuthenticated()) {
+        res.send('user logged in');
+    } else {
+        res.send('Guest');
+    }
+    
     const url = req.url.split("?")[0].substr(1);
     const theme = themes[req.query.theme] || '';
     Article._readOne({
