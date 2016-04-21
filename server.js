@@ -10,6 +10,8 @@ process.argv.slice(2).forEach(function(value) {
 const http      = require("http");
 const express   = require("express");
 const app       = express();
+const mongoose  = require("mongoose");
+const colors    = require("colors");
 const passport  = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -26,6 +28,14 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+/* Database */
+mongoose.connect(require("./config/init")[config['mode']].database.url, function(error){
+    if(error) {
+      console.log('INFO NOT connected to database.'.red);
+    } else {
+      console.log('INFO connected to database.');
+    }
+});
 
 
 app.set('view engine', 'ejs');
@@ -44,9 +54,8 @@ const configuration = function(req,res, next) {
       this[key] = obj[key];
     }
   };
-  res.locals['navigation'] = navigation,
-  res.locals['theme'] = false;
-  //res.locals['theme'] = (config['mode'] == 'development') ? themes[req.query.theme] : "yeti";
+  res.locals['navigation'] = navigation;
+  res.locals['theme'] = (config['mode'] == 'development') ? themes[req.query.theme] : "yeti";
   next();
 };
 

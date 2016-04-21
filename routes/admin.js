@@ -40,13 +40,10 @@ var storage = multer.diskStorage({
   }
 });
 
-console.log('process.argv = ');
-console.log(process.argv);
 
 
-mongoose.connect(init[config['mode']].database.url, function(){
-    console.log('INFO connected to database.');
-});
+
+
 
 
 router.use( bodyParser.json() );       // to support JSON-encoded bodies

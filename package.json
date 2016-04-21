@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js mode:development",
-    "production" : "nodemon server.js mode:production"
+    "production": "nodemon server.js mode:production"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "dependencies": {
     "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
+    "colors": "^1.1.2",
     "connect-flash": "^0.1.1",
     "crypto": "0.0.3",
     "ejs": "^2.4.1",
